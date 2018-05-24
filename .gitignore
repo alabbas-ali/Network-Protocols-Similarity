@@ -17,6 +17,7 @@ target/
 .c9/
 *.launch
 .settings/
+.recommenders/
 *.sublime-workspace
 
 # IDE - VSCode
