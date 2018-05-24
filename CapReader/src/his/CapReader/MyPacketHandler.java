@@ -1,4 +1,4 @@
-package his.CapReader.org;
+package his.CapReader;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import io.pkts.PacketHandler;
 import io.pkts.packet.Packet;
+import io.pkts.packet.SDPPacket;
+import io.pkts.packet.TCPPacket;
+import io.pkts.packet.rtcp.RtcpPacket;
 import io.pkts.packet.rtp.RtpPacket;
 import io.pkts.packet.sip.SipPacket;
 import io.pkts.protocol.Protocol;
@@ -18,15 +21,31 @@ public class MyPacketHandler implements PacketHandler{
 	
 	private BufferedWriter rtpWriter;
 	private BufferedWriter sipWriter;
+	private BufferedWriter rtcpWriter;
+	private BufferedWriter sdpWriter;
 	
 	public MyPacketHandler(String prefix) throws IOException{
-		 
-		File rtpFile = new File("resources/paylod/" + prefix + "_rtp.txt");
+		String dirName = "resources/" + prefix + "_paylod/";
+		File directory = new File(dirName);
+		if (! directory.exists()){
+	        directory.mkdir();
+		}
+		
+		File rtpFile = new File(dirName + prefix + "_rtp.txt");
 		if(!rtpFile.exists()) rtpFile.createNewFile();
 		rtpWriter = new BufferedWriter(new FileWriter(rtpFile));
-		File sipFile = new File("resources/paylod/" + prefix + "_sip.txt");
+		
+		File sipFile = new File(dirName + prefix + "_sip.txt");
 		if(!sipFile.exists()) sipFile.createNewFile();
 		sipWriter = new BufferedWriter(new FileWriter(sipFile));
+		
+		File rtcpFile = new File(dirName + prefix + "_rtcp.txt");
+		if(!rtcpFile.exists()) rtcpFile.createNewFile();
+		rtcpWriter = new BufferedWriter(new FileWriter(rtcpFile));
+		
+		File sdpFile = new File(dirName + prefix + "_sdp.txt");
+		if(!sdpFile.exists()) sdpFile.createNewFile();
+		sdpWriter = new BufferedWriter(new FileWriter(sdpFile));
 	}
 	
 	/**
@@ -34,12 +53,14 @@ public class MyPacketHandler implements PacketHandler{
 	 */
 	public boolean nextPacket(Packet packet) throws IOException {
 		if (packet.hasProtocol(Protocol.TCP)) {
-
 			System.out.println("TCP protocol");
+			TCPPacket tcp = (TCPPacket) packet.getPacket(Protocol.TCP);
+			if(tcp.getPayload() != null) {
+				
+			}
 		}
 		
 		if (packet.hasProtocol(Protocol.UDP)) {
-
 			System.out.println("UDP protocol");
 		}
 		
@@ -57,7 +78,25 @@ public class MyPacketHandler implements PacketHandler{
 			SipPacket sip = (SipPacket) packet.getPacket(Protocol.SIP);
 			if(sip.getPayload() != null) {
 				sipWriter.write(this.bytesToHex(sip.getPayload().getArray()));
-				rtpWriter.write("\n");
+				sipWriter.write("\n");
+			}
+		}
+		
+		if (packet.hasProtocol(Protocol.RTCP)) {
+			System.out.println("Save RTCP Paylod");
+			RtcpPacket rtcp = (RtcpPacket) packet.getPacket(Protocol.RTCP);
+			if(rtcp.getPayload() != null) {
+				rtcpWriter.write(this.bytesToHex(rtcp.getPayload().getArray()));
+				rtcpWriter.write("\n");
+			}
+		}
+		
+		if (packet.hasProtocol(Protocol.SDP)) {
+			System.out.println("Save SDP Paylod");
+			SDPPacket sdp = (SDPPacket) packet.getPacket(Protocol.SDP);
+			if(sdp.getPayload() != null) {
+				sdpWriter.write(this.bytesToHex(sdp.getPayload().getArray()));
+				sdpWriter.write("\n");
 			}
 		}
 		
@@ -73,5 +112,5 @@ public class MyPacketHandler implements PacketHandler{
 	    }
 	    return new String(hexChars);
 	}
-
+	
 }

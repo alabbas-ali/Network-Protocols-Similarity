@@ -1,4 +1,4 @@
-package his.CapReader.org;
+package his.CapReader;
 
 import java.io.IOException;
 
