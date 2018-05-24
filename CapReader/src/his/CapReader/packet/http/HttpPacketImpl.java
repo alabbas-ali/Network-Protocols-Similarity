@@ -12,26 +12,11 @@ import io.pkts.protocol.Protocol;
 
 public class HttpPacketImpl extends AbstractPacket implements HttpPacket{
 	
-	private final TransportPacket parent;
-
-    /**
-     * All the RTP headers as one buffer.
-     */
-    private final Buffer headers;
-
-    /**
-     * The raw payload of the RTP packet. Is most likely audio or video.
-     */
-    private final Buffer payload;
+	private Headers headers;
     
-    /**
-     * 
-     */
-    public HttpPacketImpl(final TransportPacket parent, final Buffer headers, final Buffer payload) {
+    public HttpPacketImpl(final TransportPacket parent, final Headers headers, final Buffer payload) {
         super(Protocol.TCP, parent, payload);
-        this.parent = parent;
         this.headers = headers;
-        this.payload = payload;
     }
 
 	@Override
@@ -58,4 +43,7 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket{
 		return null;
 	}
     
+	public Headers getHeaders() {
+		return headers;
+	}
 }
