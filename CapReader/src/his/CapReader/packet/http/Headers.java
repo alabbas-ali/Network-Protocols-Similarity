@@ -60,7 +60,10 @@ public class Headers {
 
     public int getContentLength() {
         String contentLength = getValue(CONTENT_LENGTH);
-        if (contentLength.matches("-?\\d+(\\.\\d+)?")) {
+        if (
+        	contentLength != null && 
+        	contentLength.matches("-?\\d+(\\.\\d+)?")
+        ) {
             return Integer.parseInt(contentLength);
         }
         return 0;

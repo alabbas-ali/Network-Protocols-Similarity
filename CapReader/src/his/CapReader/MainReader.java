@@ -9,7 +9,7 @@ public class MainReader {
 	
 	public static void main(String[] args) throws IOException, FramingException {
 
-		final String FILENAME = "resources/trafic.pcap";
+		final String FILENAME = "resources/trafic1.pcap";
 		
 		final Pcap pcap = Pcap.openStream(FILENAME);
 		

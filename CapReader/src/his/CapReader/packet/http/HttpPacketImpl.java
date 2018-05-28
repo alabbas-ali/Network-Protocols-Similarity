@@ -1,7 +1,10 @@
 package his.CapReader.packet.http;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.zip.GZIPInputStream;
 
 import io.pkts.buffer.Buffer;
 import io.pkts.packet.Packet;
@@ -10,14 +13,16 @@ import io.pkts.packet.TransportPacket;
 import io.pkts.packet.impl.AbstractPacket;
 import io.pkts.protocol.Protocol;
 
-public class HttpPacketImpl extends AbstractPacket implements HttpPacket{
-	
+public class HttpPacketImpl extends AbstractPacket implements HttpPacket {
+
 	private Headers headers;
-    
-    public HttpPacketImpl(final TransportPacket parent, final Headers headers, final Buffer payload) {
-        super(Protocol.TCP, parent, payload);
-        this.headers = headers;
-    }
+	private byte[] httpPayload;
+
+	public HttpPacketImpl(final TransportPacket parent, final Headers headers, final byte[] payload) {
+		super(Protocol.TCP, parent, null);
+		this.headers = headers;
+		this.httpPayload = payload;
+	}
 
 	@Override
 	public long getArrivalTime() {
@@ -28,7 +33,7 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket{
 	@Override
 	public void write(OutputStream out, Buffer payload) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -42,8 +47,70 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket{
 		// TODO Auto-generated method stub
 		return null;
 	}
-    
+
 	public Headers getHeaders() {
 		return headers;
+	}
+
+	public byte[] getHttpPayload() {
+		return httpPayload;
+	}
+
+	public boolean isCompressed() {
+		return this.getHeaders().getValue("Content-Encoding") != null
+				&& this.getHeaders().getValue("Content-Encoding").equals("gzip");
+	}
+
+	public String contentdecoding() throws IOException {
+
+		byte[] reply = this.getHttpPayload();
+		int i;
+		for (i = 0; i < reply.length-3; i++) {
+			// Finding Raw Response by two new line bytes
+			if (reply[i] == 13) {
+				if (reply[i + 1] == 10) {
+					if (reply[i + 2] == 13) {
+						if (reply[i + 3] == 10) {
+							break;
+						}
+					}
+				}
+			}
+		}
+		// Creating new Bytes to parse it in GZIPInputStream
+		byte[] newb = new byte[4096];
+		int y = 0;
+		for (int st = i + 4; st < reply.length; st++) {
+			newb[y++] = reply[st];
+		}
+		GZIPInputStream gzip = new GZIPInputStream(new ByteArrayInputStream(newb));
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+	    byte[] buffer = new byte[4096];
+	    int length;
+	    while ((length = gzip.read(buffer)) > 0) {
+	        outStream.write(buffer, 0, length);
+	    }
+	    return new String(outStream.toByteArray(), "UTF-8");
+	}
+
+	public int getContentLength() {
+		return headers.getContentLength();
+	}
+
+	public int getPayloadLength() {
+		return httpPayload.length;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		if (headers != null) {
+			builder.append("Headers...\n");
+			for (String name : headers.getNames()) {
+				builder.append(String.format("%s: %s\n", name, headers.getValue(name)));
+			}
+		}
+		builder.append(String.format("Encoded string: %s\n", httpPayload.toString()));
+		return builder.toString();
 	}
 }
