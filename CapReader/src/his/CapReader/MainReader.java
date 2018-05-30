@@ -9,12 +9,19 @@ public class MainReader {
 	
 	public static void main(String[] args) throws IOException, FramingException {
 
-		final String FILENAME = "resources/trafic1.pcap";
+		String FILENAME = "resources/trafic.pcap";
+		Pcap pcap = Pcap.openStream(FILENAME);
+		pcap.loop(new MyPacketHandler("trafic"));
+		pcap.close();
 		
-		final Pcap pcap = Pcap.openStream(FILENAME);
+		FILENAME = "resources/trafic1.pcap";
+		pcap = Pcap.openStream(FILENAME);
+		pcap.loop(new MyPacketHandler("trafic1"));
+		pcap.close();
 		
-		pcap.loop(new MyPacketHandler("paylod"));
-		
+		FILENAME = "resources/trafic2.pcap";
+		pcap = Pcap.openStream(FILENAME);
+		pcap.loop(new MyPacketHandler("trafic2"));
 		pcap.close();
 	}
 }
