@@ -7,10 +7,9 @@ import java.util.regex.Pattern;
 
 public abstract class KShingling {
 
-	private static final int DEFAULT_K = 1;
+	private static final int DEFAULT_K = 2;
 
     private final int k;
-
 
     private static final Pattern SPACE_REG = Pattern.compile("\\s+");
 
@@ -21,8 +20,7 @@ public abstract class KShingling {
         this.k = k;
     }
 
-
-    KShingling() {
+    public KShingling() {
         this(DEFAULT_K);
     }
 
@@ -39,10 +37,10 @@ public abstract class KShingling {
      * can be up to k * size of the string
      *
      */
-    public final Map<String, Integer> getProfile(final String string) {
+    public final Map<String, Integer> getProfile(final String input) {
         HashMap<String, Integer> shingles = new HashMap<String, Integer>();
 
-        String string_no_space = SPACE_REG.matcher(string).replaceAll(" ");
+        String string_no_space = SPACE_REG.matcher(input).replaceAll("");
         for (int i = 0; i < (string_no_space.length() - k + 1); i++) {
             String shingle = string_no_space.substring(i, i + k);
             Integer old = shingles.get(shingle);
@@ -54,6 +52,28 @@ public abstract class KShingling {
         }
 
         return Collections.unmodifiableMap(shingles);
+    }
+    
+    public final Map<String, Integer> tokenize(final String input) {
+    	HashMap<String, Integer> shingles = new HashMap<String, Integer>();
+    	
+    	String string_no_space = SPACE_REG.matcher(input).replaceAll("");
+    	int postion = 0;
+        final int length = string_no_space.length();
+        while (postion <= length) {
+        	int start = postion;
+        	int end = postion + this.getK() < length ? postion + this.getK() : length;
+            final String shingle = string_no_space.substring(start, end);
+            Integer old = shingles.get(shingle);
+            if (old != null) {
+                shingles.put(shingle, old + 1);
+            } else {
+                shingles.put(shingle, 1);
+            }
+            postion += this.getK();
+        }
+    	return Collections.unmodifiableMap(shingles);
+    	
     }
 
 }
