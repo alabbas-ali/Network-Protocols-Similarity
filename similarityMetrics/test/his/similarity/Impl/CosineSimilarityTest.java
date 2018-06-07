@@ -8,7 +8,7 @@ public class CosineSimilarityTest {
 	
 	@Test
     public void testSimilarity() {
-		CosineSimilarity instance = new CosineSimilarity();
+		CosineSimilarity instance = new CosineSimilarity(1);
         
         double result = instance.similarity("ABCD", "123");
         assertEquals(0.0, result, 0.0);
@@ -25,7 +25,7 @@ public class CosineSimilarityTest {
         
         NullTests.testSimilarity(instance);
     }
-
+	
     @Test
     public void testDistance() {
     	CosineSimilarity instance = new CosineSimilarity(2);

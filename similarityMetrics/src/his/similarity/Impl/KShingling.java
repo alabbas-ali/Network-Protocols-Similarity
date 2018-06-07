@@ -28,16 +28,7 @@ public abstract class KShingling {
         return k;
     }
 
-    /**
-     * Compute and return the profile of s, as defined by Ukkonen "Approximate
-     * string-matching with q-grams and maximal matches".
-     * https://www.cs.helsinki.fi/u/ukkonen/TCS92.pdf The profile is the number
-     * of occurrences of k-shingles, and is used to compute q-gram similarity,
-     * Jaccard index, etc. Pay attention: the memory requirement of the profile
-     * can be up to k * size of the string
-     *
-     */
-    public final Map<String, Integer> getProfile(final String input) {
+    protected final Map<String, Integer> getProfile(final String input) {
         HashMap<String, Integer> shingles = new HashMap<String, Integer>();
 
         String string_no_space = SPACE_REG.matcher(input).replaceAll("");
@@ -54,7 +45,43 @@ public abstract class KShingling {
         return Collections.unmodifiableMap(shingles);
     }
     
-    public final Map<String, Integer> tokenize(final String input) {
+    
+    protected final double norm(final Map<String, Integer> profile) {
+		double agg = 0;
+
+		for (Map.Entry<String, Integer> entry : profile.entrySet()) {
+			agg += 1.0 * entry.getValue() * entry.getValue();
+		}
+
+		return Math.sqrt(agg);
+	}
+
+    protected final double dotProduct(
+			final Map<String, Integer> profile1, 
+			final Map<String, Integer> profile2
+	) {
+
+		// Loop over the smallest map
+		Map<String, Integer> small_profile = profile2;
+		Map<String, Integer> large_profile = profile1;
+		if (profile1.size() < profile2.size()) {
+			small_profile = profile1;
+			large_profile = profile2;
+		}
+
+		double agg = 0;
+		for (Map.Entry<String, Integer> entry : small_profile.entrySet()) {
+			Integer i = large_profile.get(entry.getKey());
+			if (i == null) {
+				continue;
+			}
+			agg += 1.0 * entry.getValue() * i;
+		}
+
+		return agg;
+	}
+    
+    protected final Map<String, Integer> tokenize(final String input) {
     	HashMap<String, Integer> shingles = new HashMap<String, Integer>();
     	
     	String string_no_space = SPACE_REG.matcher(input).replaceAll("");

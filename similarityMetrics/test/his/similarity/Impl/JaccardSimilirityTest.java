@@ -8,7 +8,7 @@ public class JaccardSimilirityTest {
 	
     @Test
     public void testSimilarity() {
-        JaccardSimilarity instance = new JaccardSimilarity();
+        JaccardSimilarity instance = new JaccardSimilarity(1);
         
         double result = instance.similarity("ABCD", "123");
         assertEquals(0.0, result, 0.0);
