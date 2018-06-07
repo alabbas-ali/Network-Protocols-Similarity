@@ -4,13 +4,13 @@ import java.util.Map;
 
 import his.similarity.metrics.Similarity;
 
-public class EuclideanSimilarity extends KShingling implements Similarity{
+public class RBFSimilarity extends KShingling implements Similarity{
 	
-	public EuclideanSimilarity(final int k) {
+	public RBFSimilarity(final int k) {
 		super(k);
 	}
 
-	public EuclideanSimilarity() {
+	public RBFSimilarity() {
 		super();
 	}
 	
