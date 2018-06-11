@@ -117,16 +117,19 @@ public class MyPacketHandler implements PacketHandler {
 			if (http.getHttpPayload() != null) {
 				if (http.isCompressed()) {
 					try {
-						System.out.println(bytesToHex(http.getHttpPayload()));
+						//System.out.println(bytesToHex(http.getHttpPayload()));
 						//System.out.println(new String(http.getHttpPayload(), "UTF-8"));
-						String s = http.contentdecoding();
-						System.out.println(s);
+						System.out.println( "decoding" );
+						System.out.println(" is : " + bytesToHex(http.contentdecoding()));
+						writer.write(bytesToHex(http.contentdecoding()));
+						writer.write("\n");
 					} catch (Exception e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
+				}else {
+					writer.write(bytesToHex(http.getHttpPayload()));
+					writer.write("\n");
 				}
-				writer.write(bytesToHex(http.getHttpPayload()));
-				writer.write("\n");
 			}
 		} else if (packet.getPayload() != null) {
 			writer.write(this.bytesToHex(packet.getPayload().getArray()));

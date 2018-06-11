@@ -20,7 +20,6 @@ public class NGram implements Similarity {
 		this.n = DEFAULT_N;
 	}
 	
-	
 	@Override
 	public double distance(String s1, String s2) {
 		

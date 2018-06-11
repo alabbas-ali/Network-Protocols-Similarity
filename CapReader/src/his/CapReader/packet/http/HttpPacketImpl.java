@@ -61,7 +61,7 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket {
 				&& this.getHeaders().getValue("Content-Encoding").equals("gzip");
 	}
 
-	public String contentdecoding() throws IOException {
+	public byte[] contentdecoding() throws IOException {
 
 		byte[] reply = this.getHttpPayload();
 		int i;
@@ -90,7 +90,7 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket {
 	    while ((length = gzip.read(buffer)) > 0) {
 	        outStream.write(buffer, 0, length);
 	    }
-	    return new String(outStream.toByteArray(), "UTF-8");
+	    return outStream.toByteArray();
 	}
 
 	public int getContentLength() {

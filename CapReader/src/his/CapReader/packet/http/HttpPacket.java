@@ -12,7 +12,7 @@ public interface HttpPacket extends ApplicationPacket {
 
 	boolean isCompressed();
 
-	String contentdecoding() throws IOException;
+	byte[] contentdecoding() throws IOException;
 
 	public int getContentLength();
 
