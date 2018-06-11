@@ -113,8 +113,8 @@ public class NGramSimilarity implements Similarity {
 
 	@Override
 	public double similarity(String s1, String s2) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return 1 - this.distance(s1, s2);
 	}
 
 }

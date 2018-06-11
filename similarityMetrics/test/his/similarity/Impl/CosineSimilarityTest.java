@@ -2,6 +2,7 @@ package his.similarity.Impl;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class CosineSimilarityTest {
@@ -31,6 +32,16 @@ public class CosineSimilarityTest {
     	CosineSimilarity instance = new CosineSimilarity(2);
         double result = instance.distance("ABECD", "ABEF");
         assertEquals(0.422, result, 0.01);
+        
+        String s0 = "ABABABAB";
+        String s1 = "ABCABCABCABC";
+        String s2 = "POIULKJH";
+        
+        Assert.assertTrue(instance.distance(s0, s1) < instance.distance(s0, s2));
+        
+        assertEquals(0.0, instance.distance("ABCDF", "ABCDF"), 0.0);
+        assertEquals(1.0, instance.distance("12", "34"), 0.0);
+        
         NullTests.testDistance(instance);
     }
 }
