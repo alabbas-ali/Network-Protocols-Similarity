@@ -5,6 +5,12 @@ import java.util.List;
 
 import his.similarity.metrics.Similarity;
 
+/**
+ * Does some thing in old style.
+ *
+ * @deprecated use {@link #new NGramSimilarity()} instead.  
+ */
+@Deprecated()
 public class NGram implements Similarity {
 
 	private List<result> results;
