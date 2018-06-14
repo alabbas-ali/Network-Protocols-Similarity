@@ -15,12 +15,14 @@ public class Cluster {
 		this.name = name;
 	}
 
-	public void addFeatures(Map<String, Feature> features) {
-		
-		for (Entry<String, Feature> entry : features.entrySet()) {
-			
+	public void addFeatures(Map<String, Feature> newFeatures) {
+		for (Entry<String, Feature> entry : newFeatures.entrySet()) {
+			if(this.features.containsKey(entry.getKey())) {
+				
+			}else {
+				this.features.put(entry.getKey(), entry.getValue());
+			}
 		}
-		this.features = features;
 	}
 
 	public Map<String, Feature> getFeatures() {
