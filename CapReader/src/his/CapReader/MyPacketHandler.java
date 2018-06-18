@@ -17,7 +17,6 @@ public class MyPacketHandler implements PacketHandler {
 	private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
 	private String dirName;
-	private String prefix;
 	private BufferedWriter rtpWriter;
 	private BufferedWriter sipWriter;
 	private BufferedWriter rtcpWriter;
@@ -27,7 +26,6 @@ public class MyPacketHandler implements PacketHandler {
 
 	public MyPacketHandler(String prefix) throws IOException {
 		this.dirName = "resources/" + prefix + "_paylod/";
-		this.prefix = prefix;
 		this.init();
 	}
 
@@ -37,28 +35,28 @@ public class MyPacketHandler implements PacketHandler {
 			directory.mkdir();
 		}
 
-		File rtpFile = new File(dirName + prefix + "_rtp.txt");
+		File rtpFile = new File(dirName + "rtp.txt");
 		if (!rtpFile.exists())
 			rtpFile.createNewFile();
 		rtpWriter = new BufferedWriter(new FileWriter(rtpFile));
 
-		File sipFile = new File(dirName + prefix + "_sip.txt");
+		File sipFile = new File(dirName + "sip.txt");
 		if (!sipFile.exists())
 			sipFile.createNewFile();
 		sipWriter = new BufferedWriter(new FileWriter(sipFile));
 
-		File rtcpFile = new File(dirName + prefix + "_rtcp.txt");
+		File rtcpFile = new File(dirName + "rtcp.txt");
 		if (!rtcpFile.exists())
 			rtcpFile.createNewFile();
 		rtcpWriter = new BufferedWriter(new FileWriter(rtcpFile));
 
-		File sdpFile = new File(dirName + prefix + "_sdp.txt");
+		File sdpFile = new File(dirName + "sdp.txt");
 		if (!sdpFile.exists())
 			sdpFile.createNewFile();
 		sdpWriter = new BufferedWriter(new FileWriter(sdpFile));
 
 		httpFramer = new HttpFramer();
-		File httpFile = new File(dirName + prefix + "_http.txt");
+		File httpFile = new File(dirName + "http.txt");
 		if (!httpFile.exists())
 			httpFile.createNewFile();
 		httpWriter = new BufferedWriter(new FileWriter(httpFile));

@@ -44,20 +44,21 @@ public class MahalanobisDistance extends KShingling{
         // Create a new array with the difference between the two arrays
         double [] diff = new double[length];
         
-        for (int i = 0; i < length; i++) {
-            diff[i] = profile1.get(key) - profile2.get(key);
-        }
+       // for (int i = 0; i < length; i++) {
+       //     diff[i] = profile1.get(key) - profile2.get(key);
+      //  }
         
         // Left-hand side of the equation: vector * invcov^-1
-        double [] left = invcov.preMultiply(diff);
+     //   double [] left = invcov.preMultiply(diff);
         
         // Compute the dot product of both vectors
-        double res = 0.0;
-        for (int i = 0; i < diff.length; i++) {
-            res += left[i] * diff[i];
-        }
+     //   double res = 0.0;
+    //    for (int i = 0; i < diff.length; i++) {
+     //       res += left[i] * diff[i];
+    //    }
         
-        return Math.sqrt(res);
+     //   return Math.sqrt(res);
+        return 0;
     }
     
 }
