@@ -14,17 +14,23 @@ public class Main {
 			"trafic5_paylod" };
 
 	public static void main(String[] args) throws IOException, FramingException {
-
+		
+		System.out.println("::: Read pcap files and extract protocol packets :::");
 		CapReader reader = new CapReader();
 		String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap", "trafic4.pcap", "trafic5.pcap" };
 		reader.readFiles(files);
-
+		
+		System.out.println("::: Initilize Claster Cintromes, Learning from Stream proparty :::");
 		List<Cluster> clusterList = getClasters();
 
+		System.out.println("::: Read Random Steram and Try to classify them using similarities :::");
 		RandomStreamReader randomStreams = new RandomStreamReader(streams);
 		String randombacket;
 		while ((randombacket = randomStreams.hasNext()) != null) {
-
+			double[][] similarityResults = new double[clusterList.size()][7];
+			
+			
+			
 		}
 	}
 
