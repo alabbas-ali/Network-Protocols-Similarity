@@ -1,9 +1,9 @@
-package his.packet.clustring;
+package his.packet.stream;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class SerialStreamReader extends MyStreamReader {
+public class SerialStreamReader extends MyStreamReader implements ISerialStreamReader{
 
 	private int currentHttpFolder = 0;
 	private int currentRtpFolder = 0;

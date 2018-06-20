@@ -1,4 +1,4 @@
-package his.packet.clustring;
+package his.packet.stream;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

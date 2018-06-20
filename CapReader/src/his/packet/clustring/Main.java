@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import his.CapReader.CapReader;
+import his.packet.stream.RandomStreamReader;
+import his.packet.stream.SerialStreamReader;
 import io.pkts.framer.FramingException;
 
 public class Main {
@@ -63,7 +65,7 @@ public class Main {
 			}
 			clusterList.add(sipCluster);
 
-			Cluster rtcpCluster = new Cluster("sip");
+			Cluster rtcpCluster = new Cluster("rtcp");
 			String rtcpbacket = "";
 			while ((rtcpbacket = serialStreams.hasNextRtcp()) != null) {
 				Map<String, Integer> secandFeature = Cluster.getProfile(rtcpbacket, 2);

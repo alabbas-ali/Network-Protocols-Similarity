@@ -1,10 +1,10 @@
-package his.packet.clustring;
+package his.packet.stream;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
-public class RandomStreamReader extends MyStreamReader {
+public class RandomStreamReader extends MyStreamReader implements IRandomStreamReader{
 
 	private Random randomNum = new Random();
 
