@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import his.CapReader.CapReader;
-import his.packet.stream.ISerialStreamReader;
 import his.packet.stream.SerialStreamReader;
 import io.pkts.framer.FramingException;
 import his.similarity.Impl.*;
@@ -13,33 +11,36 @@ import his.similarity.Impl.*;
 public class Main {
 
 	public static void main(String[] args) throws IOException, FramingException {
-		System.out.println("::: Read pcap files and extract protocol packets :::");
-
-		CapReader reader = new CapReader();
-		String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap" };
-		reader.readFiles("resources/clustring/", files);
-
+		//System.out.println("::: Read pcap files and extract protocol packets :::");
+		
+		//CapReader reader = new CapReader();
+		//String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap" };
+		//reader.readFiles("resources/comparing/", files);
+		
 		String[] stream1_folder = { "resources/comparing/trafic1_paylod" };
 		String[] stream2_folder = { "resources/comparing/trafic2_paylod" };
 		String[] stream3_folder = { "resources/comparing/trafic3_paylod" };
 		Map<String, String> stream1 = readStream(stream1_folder);
+		
+		System.out.println(stream1.get("http"));
+		
 		Map<String, String> stream2 = readStream(stream2_folder);
 		Map<String, String> stream3 = readStream(stream3_folder);
-
+		
 		System.out.println("::: Comparing the same stream :::");
 		printTable(2, stream1, stream1);
-
+		
 		System.out.println("::: Comparing the 50% same stream :::");
 		printTable(2, stream1, stream2);
-
+		
 		System.out.println("::: Comparing the tow different streams :::");
 		printTable(2, stream1, stream3);
-
+		
 	}
 
 	public static void printTable(
-			int k, 
-			Map<String, String> stream1, 
+			int k,
+			Map<String, String> stream1,
 			Map<String, String> stream2
 	) {
 		System.out.println();
@@ -52,7 +53,7 @@ public class Main {
 		printRow(k, "http", "rtp", stream1, stream2);
 		printRow(k, "rtp", "sip", stream1, stream2);
 	}
-
+	
 	public static void printRow(
 			int k,
 			String protocol1,
@@ -60,7 +61,7 @@ public class Main {
 			Map<String, String> stream1,
 			Map<String, String> stream2
 	) {
-
+		
 		CosineSimilarity cosine = new CosineSimilarity(k);
 		JaccardSimilarity jaccard = new JaccardSimilarity(k);
 		RBFSimilarity rbf = new RBFSimilarity(k);
@@ -76,60 +77,60 @@ public class Main {
 				+ need.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "| "
 				+ smith.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "|");
 	}
-
+	
 	public static Map<String, String> readStream(String[] folders) {
-
+		
 		Map<String, String> stream = new HashMap<String, String>();
-
+		
 		try {
-
-			ISerialStreamReader streamReader = new SerialStreamReader(folders);
-
+			
+			SerialStreamReader serialStreams = new SerialStreamReader(folders);
+			
 			String rtpbacket = "";
-			while ((rtpbacket = streamReader.hasNextRtp()) != null) {
+			while ((rtpbacket = serialStreams.hasNextRtp()) != null) {
 				if (stream.containsKey("rtp")) {
 					stream.put("rtp", stream.get("rtp") + rtpbacket);
 				} else {
 					stream.put("rtp", rtpbacket);
 				}
 			}
-
+			
 			String sipbacket = "";
-			while ((sipbacket = streamReader.hasNextSip()) != null) {
+			while ((sipbacket = serialStreams.hasNextSip()) != null) {
 				if (stream.containsKey("sip")) {
 					stream.put("sip", stream.get("sip") + sipbacket);
 				} else {
 					stream.put("sip", sipbacket);
 				}
 			}
-
+			
 			String rtcpbacket = "";
-			while ((rtcpbacket = streamReader.hasNextRtcp()) != null) {
+			while ((rtcpbacket = serialStreams.hasNextRtcp()) != null) {
 				if (stream.containsKey("rtcp")) {
 					stream.put("rtcp", stream.get("rtcp") + rtcpbacket);
 				} else {
 					stream.put("rtcp", rtcpbacket);
 				}
 			}
-
+			
 			String sdpbacket = "";
-			while ((sdpbacket = streamReader.hasNextSdp()) != null) {
+			while ((sdpbacket = serialStreams.hasNextSdp()) != null) {
 				if (stream.containsKey("sdp")) {
 					stream.put("sdp", stream.get("sdp") + sdpbacket);
 				} else {
 					stream.put("sdp", sdpbacket);
 				}
 			}
-
+			
 			String httpbacket = "";
-			while ((httpbacket = streamReader.hasNextHttp()) != null) {
+			while ((httpbacket = serialStreams.hasNextHttp()) != null) {
 				if (stream.containsKey("http")) {
 					stream.put("http", stream.get("http") + httpbacket);
 				} else {
 					stream.put("http", httpbacket);
 				}
 			}
-
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

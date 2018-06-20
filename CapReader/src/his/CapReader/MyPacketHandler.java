@@ -117,8 +117,8 @@ public class MyPacketHandler implements PacketHandler {
 					try {
 						//System.out.println(bytesToHex(http.getHttpPayload()));
 						//System.out.println(new String(http.getHttpPayload(), "UTF-8"));
-						System.out.println( "decoding" );
-						System.out.println(" is : " + bytesToHex(http.contentdecoding()));
+						//System.out.println( "decoding" );
+						//System.out.println(" is : " + bytesToHex(http.contentdecoding()));
 						writer.write(bytesToHex(http.contentdecoding()));
 						writer.write("\n");
 					} catch (Exception e) {
