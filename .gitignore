@@ -10,7 +10,7 @@ node_modules/
 node/
 target/
 
-CapReader/resources/trafic?_paylod/
+CapReader/resources/*/trafic?_paylod/
 
 # IDEs and editors
 /.idea
