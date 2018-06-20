@@ -24,8 +24,8 @@ public class MyPacketHandler implements PacketHandler {
 	private BufferedWriter httpWriter;
 	private HttpFramer httpFramer;
 
-	public MyPacketHandler(String prefix) throws IOException {
-		this.dirName = "resources/" + prefix + "_paylod/";
+	public MyPacketHandler(String folder, String prefix) throws IOException {
+		this.dirName = folder + prefix + "_paylod/";
 		this.init();
 	}
 

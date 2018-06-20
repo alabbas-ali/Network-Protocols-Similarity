@@ -2,6 +2,7 @@ package his.similarity.Impl;
 
 import java.util.Map;
 
+import his.similarity.functions.KShingling;
 import his.similarity.metrics.Similarity;
 
 public class CosineSimilarity extends KShingling implements Similarity {

@@ -4,6 +4,7 @@ package his.similarity.Impl;
 import java.util.Map;
 //import java.util.Set;
 
+import his.similarity.functions.KShingling;
 import his.similarity.metrics.Similarity;
 
 public class RBFSimilarity extends KShingling implements Similarity{

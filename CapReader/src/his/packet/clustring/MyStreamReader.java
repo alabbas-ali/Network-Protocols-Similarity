@@ -19,7 +19,7 @@ public abstract class MyStreamReader {
 		streamsEnd = new boolean[width][hight];
 
 		for (int i = 0; i < width; i++) {
-			String dirName = "resources/" + folers[i];
+			String dirName = folers[i];
 			for (int j = 0; j < hight; j++) {
 				readers[i][j] = new BufferedReader(new FileReader(dirName + files[j]));
 				streamsEnd[i][j] = false;

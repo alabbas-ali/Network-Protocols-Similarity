@@ -2,6 +2,8 @@ package his.similarity.Impl;
 
 import java.util.Map;
 
+import his.similarity.functions.KShingling;
+
 public class MahalanobisDistance extends KShingling{
 	
 	//private RealMatrix invcov = null;

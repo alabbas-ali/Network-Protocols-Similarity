@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import his.similarity.functions.KShingling;
 import his.similarity.metrics.Similarity;
 
 public class JaccardSimilarity extends KShingling implements Similarity {

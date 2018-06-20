@@ -10,15 +10,20 @@ import io.pkts.framer.FramingException;
 
 public class Main {
 
-	public static String[] streams = { "trafic1_paylod", "trafic2_paylod", "trafic3_paylod", "trafic4_paylod",
-			"trafic5_paylod" };
+	public static String[] streams = { 
+			"resources/clustring/trafic1_paylod", 
+			"resources/clustring/trafic2_paylod", 
+			"resources/clustring/trafic3_paylod", 
+			"resources/clustring/trafic4_paylod",
+			"resources/clustring/trafic5_paylod" 
+	};
 
 	public static void main(String[] args) throws IOException, FramingException {
 		
 		System.out.println("::: Read pcap files and extract protocol packets :::");
 		CapReader reader = new CapReader();
 		String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap", "trafic4.pcap", "trafic5.pcap" };
-		reader.readFiles(files);
+		reader.readFiles("resources/clustring/", files);
 		
 		System.out.println("::: Initilize Claster Cintromes, Learning from Stream proparty :::");
 		List<Cluster> clusterList = getClasters();

@@ -1,9 +1,11 @@
-package his.similarity.Impl;
+package his.similarity.functions;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import static java.lang.Math.sqrt;
 
 public abstract class KShingling {
 
@@ -52,7 +54,7 @@ public abstract class KShingling {
 			agg += 1.0 * entry.getValue() * entry.getValue();
 		}
 
-		return Math.sqrt(agg);
+		return sqrt(agg);
 	}
 
 	protected final double dotProduct(final Map<String, Integer> profile1, final Map<String, Integer> profile2) {
