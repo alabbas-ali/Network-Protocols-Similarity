@@ -1,12 +1,12 @@
-package his.CapReader;
+package his.pcap.reader;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import his.CapReader.framer.HttpFramer;
-import his.CapReader.packet.http.HttpPacket;
+import his.pcap.reader.http.HttpPacket;
+import his.pcap.readerframer.HttpFramer;
 import io.pkts.PacketHandler;
 import io.pkts.packet.Packet;
 import io.pkts.packet.TCPPacket;

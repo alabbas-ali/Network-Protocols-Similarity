@@ -58,7 +58,6 @@ public class SmithWatermanSimilarity implements Similarity {
 			return 0;
 		}
 		
-		
 		final int n = a.length();
 		final int m = b.length();
 
@@ -69,39 +68,30 @@ public class SmithWatermanSimilarity implements Similarity {
 
 		// Initialize edge
 		for (int i = 0; i < n; i++) {
-
+			
 			// Find most optimal deletion
 			float maxGapCost = 0;
 			for (int k = max(1, i - windowSize); k < i; k++) {
 				maxGapCost = max(maxGapCost, d[i - k][0] + gap.value(i - k, i));
 			}
-
 			d[i][0] = Math.max(0, maxGapCost, substitution.compare(a, i, b, 0));
-
 			max = max(max, d[i][0]);
-
 		}
 
 		// Initialize edge
 		for (int j = 1; j < m; j++) {
-
 			// Find most optimal insertion
 			float maxGapCost = 0;
 			for (int k = max(1, j - windowSize); k < j; k++) {
 				maxGapCost = max(maxGapCost, d[0][j - k] + gap.value(j - k, j));
 			}
-
 			d[0][j] = Math.max(0, maxGapCost, substitution.compare(a, 0, b, j));
-
 			max = max(max, d[0][j]);
-
 		}
 
 		// Build matrix
 		for (int i = 1; i < n; i++) {
-
 			for (int j = 1; j < m; j++) {
-
 				float maxGapCost = 0;
 				// Find most optimal deletion
 				for (int k = max(1, i - windowSize); k < i; k++) {
@@ -111,13 +101,10 @@ public class SmithWatermanSimilarity implements Similarity {
 				for (int k = max(1, j - windowSize); k < j; k++) {
 					maxGapCost = max(maxGapCost, d[i][j - k] + gap.value(j - k, j));
 				}
-
 				// Find most optimal of insertion, deletion and substitution
 				d[i][j] = Math.max(0, maxGapCost, d[i - 1][j - 1] + substitution.compare(a, i, b, j));
-
 				max = max(max, d[i][j]);
 			}
-
 		}
 
 		return max;

@@ -1,10 +1,10 @@
-package his.CapReader.framer;
+package his.pcap.readerframer;
 
 import java.io.IOException;
 
-import his.CapReader.packet.http.Headers;
-import his.CapReader.packet.http.HttpPacket;
-import his.CapReader.packet.http.HttpPacketImpl;
+import his.pcap.reader.http.Headers;
+import his.pcap.reader.http.HttpPacket;
+import his.pcap.reader.http.HttpPacketImpl;
 import io.pkts.buffer.Buffer;
 import io.pkts.framer.FramingException;
 import io.pkts.packet.TransportPacket;

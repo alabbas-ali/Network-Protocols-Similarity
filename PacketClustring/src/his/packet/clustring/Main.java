@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import his.CapReader.CapReader;
 import his.packet.stream.RandomStreamReader;
 import his.packet.stream.SerialStreamReader;
+import his.pcap.reader.CapReader;
 import io.pkts.framer.FramingException;
 
 public class Main {

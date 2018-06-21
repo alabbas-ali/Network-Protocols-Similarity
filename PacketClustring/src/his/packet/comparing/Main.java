@@ -76,7 +76,7 @@ public class Main {
 		System.out.format("%21s", formatter.format(rbf.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
 		System.out.format("%21s", formatter.format(ngram.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
 		System.out.format("%21s", formatter.format(need.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
-		//System.out.format("%21s", formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2))) + " |");
+		System.out.format("%21s", formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2))) + " |");
 		System.out.println();
 		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 	}

@@ -1,4 +1,4 @@
-package his.CapReader;
+package his.pcap.reader;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package his.CapReader.packet.http;
+package his.pcap.reader.http;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
