@@ -1,6 +1,8 @@
 package his.packet.comparing;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +11,13 @@ import io.pkts.framer.FramingException;
 import his.similarity.Impl.*;
 
 public class Main {
+	
+	public static CosineSimilarity cosine = new CosineSimilarity(2);
+	public static JaccardSimilarity jaccard = new JaccardSimilarity(2);
+	public static RBFSimilarity rbf = new RBFSimilarity(2);
+	public static NGramSimilarity ngram = new NGramSimilarity(2);
+	public static NeedlemanWunchSimilarity need = new NeedlemanWunchSimilarity();
+	public static SmithWatermanSimilarity smith = new SmithWatermanSimilarity();
 
 	public static void main(String[] args) throws IOException, FramingException {
 		//System.out.println("::: Read pcap files and extract protocol packets :::");
@@ -25,54 +34,51 @@ public class Main {
 		Map<String, String> stream3 = readStream(stream3_folder);
 		
 		System.out.println("::: Comparing the same stream :::");
-		printTable(2, stream1, stream1);
+		printTable(stream1, stream1);
 		
 		System.out.println("::: Comparing the 50% same stream :::");
-		printTable(2, stream1, stream2);
+		printTable(stream1, stream2);
 		
 		System.out.println("::: Comparing the tow different streams :::");
-		printTable(2, stream1, stream3);
+		printTable(stream1, stream3);
 		
 	}
 
 	public static void printTable(
-			int k,
 			Map<String, String> stream1,
 			Map<String, String> stream2
 	) {
 		System.out.println();
-		System.out.println("Protocoles   |  Cosine  |  Jaccard  |  RBF  |  NGram  | Needleman_Wunch | Smith_Waterman");
-		System.out.println("----------------------------------------------------------------------------------------");
-		printRow(k, "http", "http", stream1, stream2);
-		printRow(k, "sip", "sip", stream1, stream2);
-		printRow(k, "rtp", "rtp", stream1, stream2);
-		printRow(k, "http", "sip", stream1, stream2);
-		printRow(k, "http", "rtp", stream1, stream2);
-		printRow(k, "rtp", "sip", stream1, stream2);
+		System.out.println("Protocoles    |       Cosine       |      Jaccard       |        RBF         |        NGram       |   Needleman_Wunch  |   Smith_Waterman  |");
+		System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------");
+		printRow("http", "http", stream1, stream2);
+		printRow("sip", "sip", stream1, stream2);
+		printRow("rtp", "rtp", stream1, stream2);
+		printRow("sdp", "sdp", stream1, stream2);
+		printRow("http", "sip", stream1, stream2);
+		printRow("http", "rtp", stream1, stream2);
+		printRow("http", "sdp", stream1, stream2);
+		printRow("rtp", "sip", stream1, stream2);
+		printRow("sip", "sdp", stream1, stream2);
+		printRow("rtp", "sdp", stream1, stream2);
 	}
 	
 	public static void printRow(
-			int k,
 			String protocol1,
 			String protocol2,
 			Map<String, String> stream1,
 			Map<String, String> stream2
 	) {
-		
-		CosineSimilarity cosine = new CosineSimilarity(k);
-		JaccardSimilarity jaccard = new JaccardSimilarity(k);
-		RBFSimilarity rbf = new RBFSimilarity(k);
-		NGramSimilarity ngram = new NGramSimilarity(k);
-		NeedlemanWunchSimilarity need = new NeedlemanWunchSimilarity();
-		SmithWatermanSimilarity smith = new SmithWatermanSimilarity();
-
-		System.out.println(" " + protocol1 + "/" + protocol2 + "    | "
-				+ cosine.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "| "
-				+ jaccard.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "| "
-				+ rbf.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "| "
-				+ ngram.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "| "
-				+ need.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "| "
-				+ smith.similarity(stream1.get(protocol1), stream1.get(protocol2)) + "|");
+		NumberFormat formatter = new DecimalFormat("#0.0000");
+		System.out.format("%15s", protocol1 + "/" + protocol2 + " |");
+		System.out.format("%21s", formatter.format(cosine.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
+		System.out.format("%21s", formatter.format(jaccard.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
+		System.out.format("%21s", formatter.format(rbf.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
+		System.out.format("%21s", formatter.format(ngram.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
+		System.out.format("%21s", formatter.format(need.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
+		//System.out.format("%21s", formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2))) + " |");
+		System.out.println();
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 	
 	public static Map<String, String> readStream(String[] folders) {
