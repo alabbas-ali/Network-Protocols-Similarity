@@ -21,9 +21,6 @@ public class Main {
 		String[] stream2_folder = { "resources/comparing/trafic2_paylod" };
 		String[] stream3_folder = { "resources/comparing/trafic3_paylod" };
 		Map<String, String> stream1 = readStream(stream1_folder);
-		
-		System.out.println(stream1.get("http"));
-		
 		Map<String, String> stream2 = readStream(stream2_folder);
 		Map<String, String> stream3 = readStream(stream3_folder);
 		
