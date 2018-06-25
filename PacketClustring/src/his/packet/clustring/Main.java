@@ -3,7 +3,6 @@ package his.packet.clustring;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import his.packet.stream.RandomStreamReader;
 import his.packet.stream.SerialStreamReader;
@@ -28,78 +27,92 @@ public class Main {
 		reader.readFiles("resources/clustring/", files);
 		
 		System.out.println("::: Initilize Claster Cintromes, Learning from Stream proparty :::");
-		List<Cluster> clusterList = getClasters();
+		List<Category> categories = getCategories();
 
 		System.out.println("::: Read Random Steram and Try to classify them using similarities :::");
 		RandomStreamReader randomStreams = new RandomStreamReader(streams);
+		
+		FingerPrint f = new FingerPrint(categories, 2);
 		String randombacket;
 		while ((randombacket = randomStreams.hasNext()) != null) {
-			double[][] similarityResults = new double[clusterList.size()][7];
-			
-			
-			
+			switch (f.categorize(randombacket)) {
+			case "rtp":
+
+				break;
+			case "sip":
+
+				break;
+			case "rtcp":
+
+				break;
+			case "sdp":
+				
+			case "http":
+				
+				break;
+			default:
+				break;
+			} 
 		}
 	}
 
-	public static List<Cluster> getClasters() {
-		List<Cluster> clusterList = new ArrayList<Cluster>();
+	public static List<Category> getCategories() {
+		List<Category> categories = new ArrayList<Category>();
 		
 		try {
 			SerialStreamReader serialStreams = new SerialStreamReader(streams);
 
-			Cluster rtpCluster = new Cluster("rtp");
+			Category rtpCat = new Category("rtp");
 			String rtpbacket = "";
 			while ((rtpbacket = serialStreams.hasNextRtp()) != null) {
-				rtpCluster.addFeatures(Cluster.getProfile(rtpbacket, 2));
-				rtpCluster.addFeatures(Cluster.getProfile(rtpbacket, 3));
-				rtpCluster.addFeatures(Cluster.getProfile(rtpbacket, 4));
+				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, 2));
+				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, 3));
+				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, 4));
 			}
-			clusterList.add(rtpCluster);
+			categories.add(rtpCat);
 
-			Cluster sipCluster = new Cluster("sip");
+			Category sipCat = new Category("sip");
 			String sipbacket = "";
 			while ((sipbacket = serialStreams.hasNextSip()) != null) {
-				sipCluster.addFeatures(Cluster.getProfile(sipbacket, 2));
-				sipCluster.addFeatures(Cluster.getProfile(sipbacket, 3));
-				sipCluster.addFeatures(Cluster.getProfile(sipbacket, 4));
+				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, 2));
+				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, 3));
+				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, 4));
 			}
-			clusterList.add(sipCluster);
+			categories.add(sipCat);
 
-			Cluster rtcpCluster = new Cluster("rtcp");
+			Category rtcpCat = new Category("rtcp");
 			String rtcpbacket = "";
 			while ((rtcpbacket = serialStreams.hasNextRtcp()) != null) {
-				Map<String, Integer> secandFeature = Cluster.getProfile(rtcpbacket, 2);
-				rtcpCluster.addFeatures(secandFeature);
-				rtcpCluster.addFeatures(Cluster.getProfile(rtcpbacket, 3));
-				rtcpCluster.addFeatures(Cluster.getProfile(rtcpbacket, 4));
+				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, 2));
+				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, 3));
+				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, 4));
 			}
-			clusterList.add(rtcpCluster);
+			categories.add(rtcpCat);
 
-			Cluster sdpCluster = new Cluster("sdp");
+			Category sdpCat = new Category("sdp");
 			String sdpbacket = "";
 			while ((sdpbacket = serialStreams.hasNextSdp()) != null) {
-				sdpCluster.addFeatures(Cluster.getProfile(sdpbacket, 2));
-				sdpCluster.addFeatures(Cluster.getProfile(sdpbacket, 3));
-				sdpCluster.addFeatures(Cluster.getProfile(sdpbacket, 4));
+				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, 2));
+				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, 3));
+				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, 4));
 			}
-			clusterList.add(sdpCluster);
+			categories.add(sdpCat);
 
-			Cluster httpCluster = new Cluster("http");
+			Category httpCluster = new Category("http");
 			String httpbacket = "";
 			while ((httpbacket = serialStreams.hasNextHttp()) != null) {
-				Map<String, Integer> secandFeature = Cluster.getProfile(httpbacket, 2);
-				httpCluster.addFeatures(secandFeature);
-				httpCluster.addFeatures(Cluster.getProfile(httpbacket, 3));
-				httpCluster.addFeatures(Cluster.getProfile(httpbacket, 4));
+				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, 2));
+				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, 3));
+				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, 4));
 			}
-			clusterList.add(httpCluster);
+			categories.add(httpCluster);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return clusterList;
+		return categories;
 	}
 
 }
