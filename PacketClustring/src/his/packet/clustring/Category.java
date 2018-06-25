@@ -28,5 +28,12 @@ public class Category extends HashMap<String, Feature>{
 		return name;
 	}
 
+	public Map<String,Integer> getProfile() {
+		Map<String,Integer> prof = new HashMap<String,Integer>();
+		for (Entry<String, Feature> entry : this.entrySet()) {
+			prof.put(entry.getKey(), (int) Math.floor(entry.getValue().getAvagrageFrequency()));
+		}
+		return prof;
+	}
 	
 }

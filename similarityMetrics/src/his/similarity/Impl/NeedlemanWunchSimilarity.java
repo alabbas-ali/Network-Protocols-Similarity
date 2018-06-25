@@ -8,6 +8,7 @@ import his.similarity.functions.Math;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class NeedlemanWunchSimilarity implements Similarity {
@@ -95,6 +96,16 @@ public class NeedlemanWunchSimilarity implements Similarity {
 
 		// Because we swapped the results are in v0.
 		return v0[m];
+	}
+
+	public double similarity(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public double distance(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

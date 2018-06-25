@@ -103,4 +103,36 @@ public class RBFSimilarity extends KShingling implements Similarity{
 		}
 		return (float) Math.sqrt(totalDistance);
 	}
+
+	
+	public double similarity(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		int size1 = profile1.values().stream().mapToInt(i->i).sum();
+		int size2 = profile2.values().stream().mapToInt(i->i).sum();
+		double totalPossible = (double) Math.sqrt((size1 * size1) + (size2 * size2));
+        return 1.0f - distance(profile1, profile2) / totalPossible;
+	}
+
+	
+	public double distance(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		Set<String> union = new HashSet<String>();
+		union.addAll(profile1.keySet());
+		union.addAll(profile2.keySet());
+		
+		float totalDistance = 0.0f;
+		for (final String token : union) {
+			int countInString1 = 0;
+			int countInString2 = 0;
+			if (profile1.get(token) != null) {
+				countInString1 += profile1.get(token);
+			}
+
+			if (profile2.get(token) != null) {
+				countInString2 += profile2.get(token);
+			}
+
+			totalDistance += ((countInString1 - countInString2) * (countInString1 - countInString2));
+		}
+		return (float) Math.sqrt(totalDistance);
+	}
+	
 }

@@ -10,6 +10,8 @@ import his.similarity.functions.Math;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+import java.util.Map;
+
 public class SmithWatermanSimilarity implements Similarity {
 
 	private final int windowSize;
@@ -108,6 +110,16 @@ public class SmithWatermanSimilarity implements Similarity {
 		}
 
 		return max;
+	}
+
+	public double similarity(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		
+		return 0;
+	}
+
+	public double distance(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		
+		return 0;
 	}
 
 }

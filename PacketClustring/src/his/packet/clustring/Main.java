@@ -27,12 +27,12 @@ public class Main {
 		reader.readFiles("resources/clustring/", files);
 		
 		System.out.println("::: Initilize Claster Cintromes, Learning from Stream proparty :::");
-		List<Category> categories = getCategories();
-
+		List<Category> categories = getCategories(3);
+		
 		System.out.println("::: Read Random Steram and Try to classify them using similarities :::");
 		RandomStreamReader randomStreams = new RandomStreamReader(streams);
 		
-		FingerPrint f = new FingerPrint(categories, 2);
+		FingerPrint f = new FingerPrint(categories, 3);
 		String randombacket;
 		while ((randombacket = randomStreams.hasNext()) != null) {
 			switch (f.categorize(randombacket)) {
@@ -56,7 +56,7 @@ public class Main {
 		}
 	}
 
-	public static List<Category> getCategories() {
+	public static List<Category> getCategories(int k) {
 		List<Category> categories = new ArrayList<Category>();
 		
 		try {
@@ -65,45 +65,35 @@ public class Main {
 			Category rtpCat = new Category("rtp");
 			String rtpbacket = "";
 			while ((rtpbacket = serialStreams.hasNextRtp()) != null) {
-				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, 2));
-				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, 3));
-				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, 4));
+				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, k));
 			}
 			categories.add(rtpCat);
 
 			Category sipCat = new Category("sip");
 			String sipbacket = "";
 			while ((sipbacket = serialStreams.hasNextSip()) != null) {
-				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, 2));
-				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, 3));
-				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, 4));
+				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, k));
 			}
 			categories.add(sipCat);
 
 			Category rtcpCat = new Category("rtcp");
 			String rtcpbacket = "";
 			while ((rtcpbacket = serialStreams.hasNextRtcp()) != null) {
-				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, 2));
-				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, 3));
-				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, 4));
+				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, k));
 			}
 			categories.add(rtcpCat);
 
 			Category sdpCat = new Category("sdp");
 			String sdpbacket = "";
 			while ((sdpbacket = serialStreams.hasNextSdp()) != null) {
-				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, 2));
-				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, 3));
-				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, 4));
+				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, k));
 			}
 			categories.add(sdpCat);
 
 			Category httpCluster = new Category("http");
 			String httpbacket = "";
 			while ((httpbacket = serialStreams.hasNextHttp()) != null) {
-				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, 2));
-				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, 3));
-				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, 4));
+				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, k));
 			}
 			categories.add(httpCluster);
 

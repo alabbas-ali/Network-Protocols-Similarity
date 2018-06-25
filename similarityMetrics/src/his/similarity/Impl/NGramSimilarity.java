@@ -1,5 +1,7 @@
 package his.similarity.Impl;
 
+import java.util.Map;
+
 import his.similarity.metrics.Similarity;
 
 public class NGramSimilarity implements Similarity {
@@ -15,7 +17,10 @@ public class NGramSimilarity implements Similarity {
         this.n = DEFAULT_N;
     }
     
-	@Override
+	public double similarity(String s1, String s2) {
+		return 1 - this.distance(s1, s2);
+	}
+    
 	public double distance(String s1, String s2) {
 		if (s1 == null || s2 == null) {
 			throw new NullPointerException("Strings must not be null");
@@ -111,10 +116,15 @@ public class NGramSimilarity implements Similarity {
         return p[sl] / Math.max(tl, sl);
 	}
 
-	@Override
-	public double similarity(String s1, String s2) {
-		
-		return 1 - this.distance(s1, s2);
+	
+	
+	public double similarity(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		return 1 - this.distance(profile1,  profile2);
+	}
+
+	
+	public double distance(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		return 0;
 	}
 
 }

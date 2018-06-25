@@ -43,5 +43,23 @@ public class JaccardSimilarity extends KShingling implements Similarity {
 
 		return 1.0 * inter / union.size();
 	}
+	
+	
+	public double similarity(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		Set<String> union = new HashSet<String>();
+		union.addAll(profile1.keySet());
+		union.addAll(profile2.keySet());
+
+		int inter = profile1.keySet().size() 
+				+ profile2.keySet().size() 
+				- union.size();
+
+		return 1.0 * inter / union.size();
+	}
+
+	
+	public double distance(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		return 1.0 - similarity(profile1, profile2);
+	}
 
 }

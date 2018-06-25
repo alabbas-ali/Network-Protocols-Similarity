@@ -39,4 +39,14 @@ public class CosineSimilarity extends KShingling implements Similarity {
 	}
 
 	
+	public double similarity(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		return dotProduct(profile1, profile2) / (norm(profile1) * norm(profile2));
+	}
+
+	
+	public double distance(Map<String, Integer> profile1, Map<String, Integer> profile2) {
+		return 1.0 - similarity(profile1, profile2);
+	}
+
+	
 }

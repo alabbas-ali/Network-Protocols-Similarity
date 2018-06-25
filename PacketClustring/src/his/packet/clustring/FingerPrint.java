@@ -44,19 +44,19 @@ public class FingerPrint {
 	}
 
 	public String categorize(String text) {
-//		int minDistance = Integer.MAX_VALUE;
-//		for (FingerPrint fp : categories) {
-//			int distance = this.getDistance(fp);
-//			this.getCategoryDistances().put(fp.getCategory(),distance);
-//			if (distance < minDistance) {
-//				minDistance = distance;
-//				this.category = fp.getCategory();
-//			}
-//		}
-		
+		Map<String,Integer> prof = getProfile(text, k);
+		double minDistance = Integer.MAX_VALUE;
+		for (Category cat : categories) {
+			Map<String,Integer> catProf = cat.getProfile();
+			double distance = this.cosine.distance(catProf, prof);
+			this.getCategoryDistances().put(fp.getCategory(), distance);
+			if (distance < minDistance) {
+				minDistance = distance;
+				this.category = cat.getName();
+			}
+		}
 		return this.category;
 	}
-	
 	
 	public static final Map<String, Integer> getProfile(final String input, int k) {
 		HashMap<String, Integer> shingles = new HashMap<String, Integer>();
