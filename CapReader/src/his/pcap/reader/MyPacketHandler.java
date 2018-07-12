@@ -63,8 +63,7 @@ public class MyPacketHandler implements PacketHandler {
 	}
 
 	/**
-	 * @param packet
-	 *            a packet from our capture file
+	 * @param packet a packet from our capture file
 	 */
 	public boolean nextPacket(Packet packet) throws IOException {
 

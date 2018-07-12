@@ -7,24 +7,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import his.packet.stream.SerialStreamReader;
-import io.pkts.framer.FramingException;
-import his.similarity.Impl.*;
+import his.similarity.metrics.Similarities;
+import his.similarity.metrics.Similarity;
 
 public class Main {
 	
-	public static CosineSimilarity cosine = new CosineSimilarity(2);
-	public static JaccardSimilarity jaccard = new JaccardSimilarity(2);
-	public static RBFSimilarity rbf = new RBFSimilarity(2);
-	public static NGramSimilarity ngram = new NGramSimilarity(2);
-	public static NeedlemanWunchSimilarity need = new NeedlemanWunchSimilarity();
-	public static SmithWatermanSimilarity smith = new SmithWatermanSimilarity();
+	public static Similarity cosine = Similarity.getInstance(Similarities.COSINE, 2);
+	public static Similarity jaccard = Similarity.getInstance(Similarities.JACCARD, 2);
+	public static Similarity rbf = Similarity.getInstance(Similarities.RBF, 2);
+	public static Similarity ngram = Similarity.getInstance(Similarities.NGRAM, 2);
+	public static Similarity need = Similarity.getInstance(Similarities.NEEDLEMAN, 2);
+	public static Similarity smith = Similarity.getInstance(Similarities.SMITHWATERMAN, 2);
 
-	public static void main(String[] args) throws IOException, FramingException {
-		//System.out.println("::: Read pcap files and extract protocol packets :::");
-		
-		//CapReader reader = new CapReader();
-		//String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap" };
-		//reader.readFiles("resources/comparing/", files);
+	public static void main(String[] args) throws IOException {
 		
 		String[] stream1_folder = { "resources/comparing/trafic1_paylod" };
 		String[] stream2_folder = { "resources/comparing/trafic2_paylod" };
@@ -76,7 +71,7 @@ public class Main {
 		System.out.format("%21s", formatter.format(rbf.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
 		System.out.format("%21s", formatter.format(ngram.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
 		System.out.format("%21s", formatter.format(need.similarity(stream1.get(protocol1), stream2.get(protocol2))) + " |");
-		System.out.format("%21s", formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2))) + " |");
+		//System.out.format("%21s", formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2))) + " |");
 		System.out.println();
 		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 	}
