@@ -26,6 +26,7 @@ public class MyPacketHandler implements PacketHandler {
 
 	public MyPacketHandler(String folder, String prefix) throws IOException {
 		this.dirName = folder + prefix + "_paylod/";
+		httpFramer = new HttpFramer();
 		this.init();
 	}
 
@@ -55,7 +56,6 @@ public class MyPacketHandler implements PacketHandler {
 			sdpFile.createNewFile();
 		sdpWriter = new BufferedWriter(new FileWriter(sdpFile));
 
-		httpFramer = new HttpFramer();
 		File httpFile = new File(dirName + "http.txt");
 		if (!httpFile.exists())
 			httpFile.createNewFile();
@@ -72,33 +72,69 @@ public class MyPacketHandler implements PacketHandler {
 			TCPPacket tcp = (TCPPacket) packet.getPacket(Protocol.TCP);
 			if (tcp.getPayload() != null && httpFramer.accept(tcp.getPayload())) {
 				// System.out.println("this is HTTP packet");
-				save(httpFramer.frame(tcp, tcp.getPayload()), httpWriter);
+				this.save(httpFramer.frame(tcp, tcp.getPayload()), httpWriter, "http");
 			}
 		}
 
 		if (packet.hasProtocol(Protocol.RTP)) {
-			// System.out.println("Save RTP Payload");
-			this.save(packet.getPacket(Protocol.RTP), rtpWriter);
+			System.out.println("Save RTP Payload");
+			this.save(packet.getPacket(Protocol.RTP), rtpWriter, "rtp");
 		}
 
 		if (packet.hasProtocol(Protocol.SIP)) {
 			// System.out.println("Save SIP Payload");
-			this.save(packet.getPacket(Protocol.SIP), sipWriter);
+			this.save(packet.getPacket(Protocol.SIP), sipWriter, "sip");
 		}
 
 		if (packet.hasProtocol(Protocol.RTCP)) {
 			// System.out.println("Save RTCP Payload");
-			this.save(packet.getPacket(Protocol.RTCP), rtcpWriter);
+			this.save(packet.getPacket(Protocol.RTCP), rtcpWriter, "rtcp");
 		}
 
 		if (packet.hasProtocol(Protocol.SDP)) {
 			// System.out.println("Save SDP Payload");
-			this.save(packet.getPacket(Protocol.SDP), sdpWriter);
+			this.save(packet.getPacket(Protocol.SDP), sdpWriter, "sdp");
 		}
 
 		return true;
 	}
 
+	private void save(Packet packet, BufferedWriter writer, String protocal) throws IOException {
+		
+		switch (protocal) {
+			case "http":
+				HttpPacket http = (HttpPacket) packet;
+				if (http.getHttpPayload() != null) {
+					if (http.isCompressed()) {
+						try {
+							//System.out.println(bytesToHex(http.getHttpPayload()));
+							//System.out.println(new String(http.getHttpPayload(), "UTF-8"));
+							//System.out.println( "decoding" );
+							//System.out.println(" is : " + bytesToHex(http.contentdecoding()));
+							writer.write(bytesToHex(http.contentdecoding()));
+							writer.write("\n");
+						} catch (Exception e) {
+							//e.printStackTrace();
+						}
+					}else {
+						writer.write(bytesToHex(http.getHttpPayload()));
+						writer.write("\n");
+						writer.flush();
+					}
+				}
+				break;
+
+			default:
+				if(protocal == "rtp")
+					System.out.println(this.bytesToHex(packet.getPayload().getArray()));
+				writer.write(this.bytesToHex(packet.getPayload().getArray()));
+				writer.write("\n");
+				writer.flush();
+				break;
+		}
+	}
+	
+	
 	private String bytesToHex(byte[] bytes) {
 		char[] hexChars = new char[bytes.length * 2];
 		for (int j = 0; j < bytes.length; j++) {
@@ -107,32 +143,6 @@ public class MyPacketHandler implements PacketHandler {
 			hexChars[j * 2 + 1] = hexArray[v & 0x0F];
 		}
 		return new String(hexChars);
-	}
-
-	private void save(Packet packet, BufferedWriter writer) throws IOException {
-		if (packet instanceof HttpPacket) {
-			HttpPacket http = (HttpPacket) packet;
-			if (http.getHttpPayload() != null) {
-				if (http.isCompressed()) {
-					try {
-						//System.out.println(bytesToHex(http.getHttpPayload()));
-						//System.out.println(new String(http.getHttpPayload(), "UTF-8"));
-						//System.out.println( "decoding" );
-						//System.out.println(" is : " + bytesToHex(http.contentdecoding()));
-						writer.write(bytesToHex(http.contentdecoding()));
-						writer.write("\n");
-					} catch (Exception e) {
-						//e.printStackTrace();
-					}
-				}else {
-					writer.write(bytesToHex(http.getHttpPayload()));
-					writer.write("\n");
-				}
-			}
-		} else if (packet.getPayload() != null) {
-			writer.write(this.bytesToHex(packet.getPayload().getArray()));
-			writer.write("\n");
-		}
 	}
 
 }

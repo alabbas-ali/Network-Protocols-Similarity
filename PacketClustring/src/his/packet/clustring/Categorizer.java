@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import his.similarity.metrics.Similarities;
 import his.similarity.metrics.Similarity;
 
-
 public class Categorizer {
 
 	private String category = "unknown";
