@@ -7,6 +7,7 @@ import java.util.List;
 import his.packet.stream.RandomStreamReader;
 import his.packet.stream.SerialStreamReader;
 import his.pcap.reader.CapReader;
+import his.similarity.metrics.Similarities;
 import io.pkts.framer.FramingException;
 
 public class Main {
@@ -32,7 +33,7 @@ public class Main {
 		System.out.println("::: Read Random Steram and Try to classify them using similarities :::");
 		RandomStreamReader randomStreams = new RandomStreamReader(streams);
 		
-		FingerPrint f = new FingerPrint(categories, 3);
+		Categorizer f = new Categorizer(Similarities.COSINE ,categories, 3);
 		String randombacket;
 		while ((randombacket = randomStreams.hasNext()) != null) {
 			switch (f.categorize(randombacket)) {
@@ -65,35 +66,35 @@ public class Main {
 			Category rtpCat = new Category("rtp");
 			String rtpbacket = "";
 			while ((rtpbacket = serialStreams.hasNextRtp()) != null) {
-				rtpCat.addFeatures(FingerPrint.getProfile(rtpbacket, k));
+				rtpCat.addFeatures(Categorizer.getProfile(rtpbacket, k));
 			}
 			categories.add(rtpCat);
 
 			Category sipCat = new Category("sip");
 			String sipbacket = "";
 			while ((sipbacket = serialStreams.hasNextSip()) != null) {
-				sipCat.addFeatures(FingerPrint.getProfile(sipbacket, k));
+				sipCat.addFeatures(Categorizer.getProfile(sipbacket, k));
 			}
 			categories.add(sipCat);
 
 			Category rtcpCat = new Category("rtcp");
 			String rtcpbacket = "";
 			while ((rtcpbacket = serialStreams.hasNextRtcp()) != null) {
-				rtcpCat.addFeatures(FingerPrint.getProfile(rtcpbacket, k));
+				rtcpCat.addFeatures(Categorizer.getProfile(rtcpbacket, k));
 			}
 			categories.add(rtcpCat);
 
 			Category sdpCat = new Category("sdp");
 			String sdpbacket = "";
 			while ((sdpbacket = serialStreams.hasNextSdp()) != null) {
-				sdpCat.addFeatures(FingerPrint.getProfile(sdpbacket, k));
+				sdpCat.addFeatures(Categorizer.getProfile(sdpbacket, k));
 			}
 			categories.add(sdpCat);
 
 			Category httpCluster = new Category("http");
 			String httpbacket = "";
 			while ((httpbacket = serialStreams.hasNextHttp()) != null) {
-				httpCluster.addFeatures(FingerPrint.getProfile(httpbacket, k));
+				httpCluster.addFeatures(Categorizer.getProfile(httpbacket, k));
 			}
 			categories.add(httpCluster);
 

@@ -13,7 +13,8 @@ public final class NullTests {
 		assertEquals(1.0, instance.distance("foo", ""), 0.1);
 
 		try {
-			instance.distance(null, null);
+			String s = null;
+			instance.distance(s, null);
 			fail("A NullPointerException was not thrown.");
 		} catch (NullPointerException ignored) {
 		}
@@ -37,7 +38,8 @@ public final class NullTests {
         assertEquals(0.0, instance.similarity("foo", ""), 0.1);
 
         try {
-            instance.similarity(null, null);
+        	String s = null;
+            instance.similarity(s, null);
             fail("A NullPointerException was not thrown.");
         } catch (NullPointerException ignored) {
         }

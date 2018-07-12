@@ -1,46 +1,31 @@
 package his.packet.clustring;
 
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import his.similarity.Impl.CosineSimilarity;
-import his.similarity.Impl.JaccardSimilarity;
-import his.similarity.Impl.NGramSimilarity;
-import his.similarity.Impl.NeedlemanWunchSimilarity;
-import his.similarity.Impl.RBFSimilarity;
-import his.similarity.Impl.SmithWatermanSimilarity;
+import his.similarity.metrics.Similarities;
+import his.similarity.metrics.Similarity;
 
 
-public class FingerPrint {
+public class Categorizer {
 
 	private String category = "unknown";
 	
 	private List<Category> categories;
 	
-	private double[][] similarityResults;
+	//private double[][] similarityResults;
 	private int k;
 	
-	private CosineSimilarity cosine;
-	private JaccardSimilarity jaccard;
-	private RBFSimilarity rbf;
-	private NGramSimilarity ngram;
-	private NeedlemanWunchSimilarity need;
-	private SmithWatermanSimilarity smith;
-
-	public FingerPrint(List<Category> categories, int k) {
+	private Similarity similarity;
+	
+	public Categorizer(Similarities type, List<Category> categories, int k) {
 		this.categories = categories;
 		this.k = k;
-		this.similarityResults = new double[categories.size()][5];
-		cosine = new CosineSimilarity(k);
-		jaccard = new JaccardSimilarity(k);
-		rbf = new RBFSimilarity(k);
-		ngram = new NGramSimilarity(k);
-		need = new NeedlemanWunchSimilarity();
-		smith = new SmithWatermanSimilarity();
+		//this.similarityResults = new double[categories.size()][5];
+		this.similarity = Similarity.getInstance(type, k);
 	}
 
 	public String categorize(String text) {
@@ -48,8 +33,7 @@ public class FingerPrint {
 		double minDistance = Integer.MAX_VALUE;
 		for (Category cat : categories) {
 			Map<String,Integer> catProf = cat.getProfile();
-			double distance = this.cosine.distance(catProf, prof);
-			this.getCategoryDistances().put(fp.getCategory(), distance);
+			double distance = this.similarity.distance(catProf, prof);
 			if (distance < minDistance) {
 				minDistance = distance;
 				this.category = cat.getName();

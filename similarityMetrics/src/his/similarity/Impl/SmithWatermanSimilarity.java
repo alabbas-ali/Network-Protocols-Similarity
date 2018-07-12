@@ -50,7 +50,6 @@ public class SmithWatermanSimilarity implements Similarity {
 		}
 
 		float maxDistance = min(s1.length(), s2.length()) * max(substitution.max(), gap.min());
-
 		return smithWaterman(s1, s2) != 0 ? smithWaterman(s1, s2) / maxDistance : 0;
 	}
 
@@ -64,13 +63,10 @@ public class SmithWatermanSimilarity implements Similarity {
 		final int m = b.length();
 
 		final float[][] d = new float[n][m];
-
 		// Initialize corner
 		float max = d[0][0] = max(0, substitution.compare(a, 0, b, 0));
-
 		// Initialize edge
 		for (int i = 0; i < n; i++) {
-			
 			// Find most optimal deletion
 			float maxGapCost = 0;
 			for (int k = max(1, i - windowSize); k < i; k++) {
