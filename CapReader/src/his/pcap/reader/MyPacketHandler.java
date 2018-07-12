@@ -76,7 +76,7 @@ public class MyPacketHandler implements PacketHandler {
 		}
 
 		if (packet.hasProtocol(Protocol.RTP)) {
-			System.out.println("Save RTP Payload");
+			//System.out.println("Save RTP Payload");
 			this.save(packet.getPacket(Protocol.RTP), rtpWriter, "rtp");
 		}
 
@@ -113,7 +113,7 @@ public class MyPacketHandler implements PacketHandler {
 							writer.write(bytesToHex(http.contentdecoding()));
 							writer.write("\n");
 						} catch (Exception e) {
-							//e.printStackTrace();
+							e.printStackTrace();
 						}
 					}else {
 						writer.write(bytesToHex(http.getHttpPayload()));
@@ -124,8 +124,8 @@ public class MyPacketHandler implements PacketHandler {
 				break;
 
 			default:
-				if(protocal == "rtp")
-					System.out.println(this.bytesToHex(packet.getPayload().getArray()));
+				//if(protocal == "rtp")
+				//	System.out.println(this.bytesToHex(packet.getPayload().getArray()));
 				writer.write(this.bytesToHex(packet.getPayload().getArray()));
 				writer.write("\n");
 				writer.flush();
