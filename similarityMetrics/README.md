@@ -22,3 +22,9 @@ Please use the Similarity interface as the entry point to library, The interface
 - double similarity(Map<String, Integer> profile1 , Map<String, Integer> profile2);
 - double distance(Map<String, Integer> profile1 , Map<String, Integer> profile2);
 
+Use this interface with the Similarities enum to istantiate any similarity measures avalable in Similarities enum.
+
+example: 
+```
+Similarity cosines_imilarity = new Similarity.getInstance(Similarities.COSINE , 2);
+```
