@@ -3,9 +3,9 @@
 
 if [[ ( -z "$1" ) || ( -z "$2" ) || ( -z "$3" ) || ( -z "$4" ) ]] 
 then
-    printf "No argument supplied";
-	printf "Please Use the script like :";
-	printf "scipt.sh ethernet_port server_IP ftp_user ftp_password";
+    printf "No argument supplied \n";
+	printf "Please Use the script like :\n";
+	printf " scipt.sh ethernet_port server_IP ftp_user ftp_password \n";
 	exit 0;
 fi
 
@@ -60,6 +60,7 @@ do
 		curl -i -H "Accept: application/html" \
 				-H "Content-Type: application/html" \
 				-X GET http://$2/webpage$j?id=$i >> http_output.txt
+		rm -rf http_output.txt;
 		# do FTP request to folderJ file I; 
 		mkdir ftptmp;
 		wget -c ftp://$3:$4@$2/folder$j/file$i.docx \
