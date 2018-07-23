@@ -11,12 +11,12 @@ fi
 
 hash tshark 2>/dev/null || {
 	printf >&2 "Installing tshark.  please waite.";
-	sudo apt install tshark
+	apt install tshark
 }
 
 hash curl 2>/dev/null || {
 	printf >&2 "Installing curl.  please waite.";
-	sudo apt install curl
+	apt install curl
 }
 
 declare -A randoms
