@@ -76,21 +76,21 @@ do
 			sed -i s/FROM_IP/$ip/g temp.txt;
 			sed -i s/TO_IP/$2/g temp.txt;
 			
-			messsg=${line//RANDOM_VERB/$randoms[random_verb$i]}
-			messsg=${messsg//RANDOM_THING/$randoms[random_thing$i]}
-			messsg=${messsg//RANDOM_NAME/$randoms[random_name$i]}
-			messsg=${messsg//RANDOM_STUDY/$randoms[random_study$i]}
-			messsg=${messsg//RANDOM_WEEKDAY/$randoms[random_weekday$i]}
-			messsg=${messsg//RANDOM_ACTION/$randoms[random_action$i]}
-			messsg=${messsg//RANDOM_VERB2/$randoms[random_verb2$i]}
-			messsg=${messsg//RANDOM_NAME2/$randoms[random_name2$i]}
-			messsg=${messsg//RANDOM_WEEKDAY2/$randoms[random_weekday2$i]}
-			messsg=${messsg//RANDOM_RELIGION/$randoms[random_religion$i]}
-			messsg=${messsg//RANDOM_THING2/$randoms[random_thing2$i]}
-			messsg=${messsg//RANDOM_DAYTIME/$randoms[random_daytime$i]}
-			messsg=${messsg//RANDOM_WEEKDAY3/$randoms[random_weekday3$i]}
-			messsg=${messsg//RANDOM_TIME/$randoms[random_time$i]}
-			messsg=${messsg//RANDOM_LOCATION/$randoms[random_location$i]}
+			messsg=${line//RANDOM_VERB/{$randoms[random_verb$i]}}
+			messsg=${messsg//RANDOM_THING/${randoms[random_thing$i]}}
+			messsg=${messsg//RANDOM_NAME/${randoms[random_name$i]}}
+			messsg=${messsg//RANDOM_STUDY/${randoms[random_study$i]}}
+			messsg=${messsg//RANDOM_WEEKDAY/${randoms[random_weekday$i]}}
+			messsg=${messsg//RANDOM_ACTION/${randoms[random_action$i]}}
+			messsg=${messsg//RANDOM_VERB2/${randoms[random_verb2$i]}}
+			messsg=${messsg//RANDOM_NAME2/${randoms[random_name2$i]}}
+			messsg=${messsg//RANDOM_WEEKDAY2/${randoms[random_weekday2$i]}}
+			messsg=${messsg//RANDOM_RELIGION/${randoms[random_religion$i]}}
+			messsg=${messsg//RANDOM_THING2/${randoms[random_thing2$i]}}
+			messsg=${messsg//RANDOM_DAYTIME/${randoms[random_daytime$i]}}
+			messsg=${messsg//RANDOM_WEEKDAY3/${randoms[random_weekday3$i]}}
+			messsg=${messsg//RANDOM_TIME/${randoms[random_time$i]}}
+			messsg=${messsg//RANDOM_LOCATION/${randoms[random_location$i]}}
 			printf "\nSend Message : $messsg \n";
 			sed -i s/MESSAGE_HERE/$messsg/g temp.txt;
 			cunt=$(echo -n $messsg | wc -m);
