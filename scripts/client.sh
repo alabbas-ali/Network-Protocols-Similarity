@@ -30,13 +30,13 @@ do
 	randoms[random_study$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 	randoms[random_weekday$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 	randoms[random_action$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_verb2$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_name2$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_weekday2$i]=$(shuf -i 0-1000 -n 1 | md5sum)
+	randoms[random_verbk$i]=$(shuf -i 0-1000 -n 1 | md5sum)
+	randoms[random_namek$i]=$(shuf -i 0-1000 -n 1 | md5sum)
+	randoms[random_weekdayk$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 	randoms[random_religion$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_thing2$i]=$(shuf -i 0-1000 -n 1 | md5sum)
+	randoms[random_thingk$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 	randoms[random_daytime$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_weekday3$i]=$(shuf -i 0-1000 -n 1 | md5sum)
+	randoms[random_weekdays$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 	randoms[random_time$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 	randoms[random_location$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 done
@@ -82,13 +82,13 @@ do
 			messsg=${messsg//RANDOM_STUDY/${randoms[random_study$i]}}
 			messsg=${messsg//RANDOM_WEEKDAY/${randoms[random_weekday$i]}}
 			messsg=${messsg//RANDOM_ACTION/${randoms[random_action$i]}}
-			messsg=${messsg//RANDOM_VERB2/${randoms[random_verb2$i]}}
-			messsg=${messsg//RANDOM_NAME2/${randoms[random_name2$i]}}
-			messsg=${messsg//RANDOM_WEEKDAY2/${randoms[random_weekday2$i]}}
+			messsg=${messsg//RANDOM_VERBK/${randoms[random_verbk$i]}}
+			messsg=${messsg//RANDOM_NAMEK/${randoms[random_namek$i]}}
+			messsg=${messsg//RANDOM_WEEKDAYK/${randoms[random_weekdayk$i]}}
 			messsg=${messsg//RANDOM_RELIGION/${randoms[random_religion$i]}}
-			messsg=${messsg//RANDOM_THING2/${randoms[random_thing2$i]}}
+			messsg=${messsg//RANDOM_THINGK/${randoms[random_thingk$i]}}
 			messsg=${messsg//RANDOM_DAYTIME/${randoms[random_daytime$i]}}
-			messsg=${messsg//RANDOM_WEEKDAY3/${randoms[random_weekday3$i]}}
+			messsg=${messsg//RANDOM_WEEKDAYS/${randoms[random_weekdays$i]}}
 			messsg=${messsg//RANDOM_TIME/${randoms[random_time$i]}}
 			messsg=${messsg//RANDOM_LOCATION/${randoms[random_location$i]}}
 			printf "\nSend Message : $messsg \n";
