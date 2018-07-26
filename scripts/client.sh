@@ -84,7 +84,7 @@ do
 			printf "\nMessage Length is: $count \n";
 			sed -i s/LENGTH_M/$count/g temp.txt;
 			python siprig.py -f temp.txt -d sip.iptel.org -p 5060 -P 55220 -v;
-		done < "cinv$j.txt"
+		done < "conv$j.txt"
 		
 		
 		#echo ${randoms[random_verb$j]};
