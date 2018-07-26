@@ -41,6 +41,9 @@ do
 	randoms[random_location$i]=$(shuf -i 0-1000 -n 1 | md5sum)
 done
 
+ip=$(ifconfig | grep -A 1 $1 | tail -1 | cut -d ' ' -f 10);
+
+printf "\nPrivate Ethernet IP is $ip";
 
 # Start runing the 150 experments
 for j in {1..3}
@@ -66,6 +69,24 @@ do
 		wget -c ftp://$3:$4@$2/folder$j/file$i.docx \
 				-p /ftptmp/
 		rm -rf ftptmp;
+		
+		# send SIP messages conversation J with conversation_parameters[I]; 
+		while IFS='' read -r line || [[ -n "$line" ]]; do
+			cp message.txt temp.txt;
+			sed -i s/FROM_IP/$ip/g temp.txt;
+			sed -i s/TO_IP/$2/g temp.txt;
+			
+			messsg=${line//RANDOM_VERB/randoms[random_verb$j]}
+			printf "\nSend Message : $messsg \n";
+			sed -i s/MESSAGE_HERE/$messsg/g temp.txt;
+			cunt=$(echo -n $messsg | wc -m);
+			count=$((321+$cunt))
+			printf "\nMessage Length is: $count \n";
+			sed -i s/LENGTH_M/$count/g temp.txt;
+			python siprig.py -f temp.txt -d sip.iptel.org -p 5060 -P 55220 -v;
+		done < "cinv$j.txt"
+		
+		
 		#echo ${randoms[random_verb$j]};
 		#echo ${randoms[random_thing$j]};
 		

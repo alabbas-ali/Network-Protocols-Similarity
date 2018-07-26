@@ -1,0 +1,30 @@
+Hi there. Why aren't you RANDOM_VERB?
+Hello. Have you tried RANDOM_THING yet?
+Are you going to the party on $random_weekday?
+No, but I was just about to.
+Don't. It's terrible.
+Oh. Okay.
+I was thinking about it. Are you?
+So, how are you knowing RANDOM_NAME?
+Oh, RANDOM_NAME and I go way back. We studied RANDOM_STUDY together.
+RANDOM_STUDY. Hmm. I heard on the radio RANDOM_WEEKDAY that all of you nurses are on strike. Are they not paying you enough?
+Yeah, I heard it's going to be a lot of fun.
+Actually it's about working conditions.
+I see. So, have you had a chance to take a RANDOM_ACTION?
+Really? Well, what time does it start?
+No, not yet. How about you?
+No, I need to lose some weight before I put on a bathing suit. But you have a great figure.
+Uh, thanks. Well, I better go and RANDOM_VERB2. There are a few people I haven't said hello to yet.
+It starts at $random_time pm, and I really think you should go.
+Wait! Did you hear that the RANDOM_NAME2 is coming to town?
+Ya. I heard that on the news RANDOM_WEEKDAY2. I bet it'll be really tough to get to see him.
+I know. But I'm not RANDOM_RELIGION anyway. Are you?
+Well, who else is going to be there?
+Yes, I am actually. Well, it looks the sun is finally coming out. I think I'll go take that RANDOM_THING2.
+Everybody from school.
+You better hurry. I hear they are asking for thunderstorms this RANDOM_DAYTIME.
+How do you know it's going to be so fun?
+This party is going to have a DJ, food, and drinks. And it is at $random_location
+Wow, that does sound like it's going to be fun.
+So am I going to see you at the party?
+Yeah, I will be there. Keep negative comments out of your small talk. You don't know if the person you are talking about is a close friend of the person you are talking to. During small talk it is not appropriate to discuss salaries.
