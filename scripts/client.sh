@@ -76,28 +76,28 @@ do
 			sed -i s/FROM_IP/$ip/g temp.txt;
 			sed -i s/TO_IP/$2/g temp.txt;
 			
-			messsg=${line//RANDOM_VERB/{$randoms[random_verb$i]}}
-			messsg=${messsg//RANDOM_THING/${randoms[random_thing$i]}}
-			messsg=${messsg//RANDOM_NAME/${randoms[random_name$i]}}
-			messsg=${messsg//RANDOM_STUDY/${randoms[random_study$i]}}
-			messsg=${messsg//RANDOM_WEEKDAY/${randoms[random_weekday$i]}}
-			messsg=${messsg//RANDOM_ACTION/${randoms[random_action$i]}}
-			messsg=${messsg//RANDOM_VERBK/${randoms[random_verbk$i]}}
-			messsg=${messsg//RANDOM_NAMEK/${randoms[random_namek$i]}}
-			messsg=${messsg//RANDOM_WEEKDAYK/${randoms[random_weekdayk$i]}}
-			messsg=${messsg//RANDOM_RELIGION/${randoms[random_religion$i]}}
-			messsg=${messsg//RANDOM_THINGK/${randoms[random_thingk$i]}}
-			messsg=${messsg//RANDOM_DAYTIME/${randoms[random_daytime$i]}}
-			messsg=${messsg//RANDOM_WEEKDAYS/${randoms[random_weekdays$i]}}
-			messsg=${messsg//RANDOM_TIME/${randoms[random_time$i]}}
-			messsg=${messsg//RANDOM_LOCATION/${randoms[random_location$i]}}
+			messsg=${line//RANDOM_VERB/{$randoms[random_verb$i]}};
+			messsg=${messsg//RANDOM_THING/${randoms[random_thing$i]}};
+			messsg=${messsg//RANDOM_NAME/${randoms[random_name$i]}};
+			messsg=${messsg//RANDOM_STUDY/${randoms[random_study$i]}};
+			messsg=${messsg//RANDOM_WEEKDAY/${randoms[random_weekday$i]}};
+			messsg=${messsg//RANDOM_ACTION/${randoms[random_action$i]}};
+			messsg=${messsg//RANDOM_VERBK/${randoms[random_verbk$i]}};
+			messsg=${messsg//RANDOM_NAMEK/${randoms[random_namek$i]}};
+			messsg=${messsg//RANDOM_WEEKDAYK/${randoms[random_weekdayk$i]}};
+			messsg=${messsg//RANDOM_RELIGION/${randoms[random_religion$i]}};
+			messsg=${messsg//RANDOM_THINGK/${randoms[random_thingk$i]}};
+			messsg=${messsg//RANDOM_DAYTIME/${randoms[random_daytime$i]}};
+			messsg=${messsg//RANDOM_WEEKDAYS/${randoms[random_weekdays$i]}};
+			messsg=${messsg//RANDOM_TIME/${randoms[random_time$i]}};
+			messsg=${messsg//RANDOM_LOCATION/${randoms[random_location$i]}};
 			printf "\nSend Message : $messsg \n";
 			sed -i s/MESSAGE_HERE/$messsg/g temp.txt;
 			cunt=$(echo -n $messsg | wc -m);
-			count=$((321+$cunt))
+			count=$((324+$cunt))
 			printf "\nMessage Length is: $count \n";
 			sed -i s/LENGTH_M/$count/g temp.txt;
-			python siprig.py -f temp.txt -d sip.iptel.org -p 5060 -P 55220 -v;
+			python siprig.py -f temp.txt -d $2 -p 5060 -P 55220 -v;
 		done < "conv$j.txt"
 		
 		
