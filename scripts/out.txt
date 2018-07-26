@@ -1,0 +1,59 @@
+
+Private Ethernet IP is 192.168.0.11
+Start experiment 1 captures traffic 1. 
+
+curl to http://192.168.0.10/webpage1?id=1 
+
+Send Message : Hi there. Why aren't you 0d3409660212df6dd348cba17a6f58c3  -? 
+
+Message Length is: 384 
+
+Send Message : Hello. Have you tried 1f6753a2a760c6f75f7073c21eb2d9ab  - yet? 
+
+Message Length is: 385 
+
+Send Message : No, but I was just about to. 
+
+Message Length is: 352 
+
+Send Message : Don't. It's terrible. 
+
+Message Length is: 345 
+
+Send Message : Oh. Okay. 
+
+Message Length is: 333 
+
+Send Message : So, how are you knowing b6e693b66d2003e1d08cb4d0a4fedda0  -? 
+
+Message Length is: 383 
+
+Send Message : Oh, b6e693b66d2003e1d08cb4d0a4fedda0  - and I go way back. We studied f86d242eed4b0801e0aeeaa412d0ea69  - together. 
+
+Message Length is: 437 
+
+Send Message : f86d242eed4b0801e0aeeaa412d0ea69  -. Hmm. I heard on the radio fa634fd274991a890aff62cd86046fe3  - that all of you nurses are on strike. Are they not paying you enough? 
+
+Message Length is: 490 
+
+Send Message : Actually it's about working conditions. 
+
+Message Length is: 363 
+
+Send Message : I see. So, have you had a chance to take a fd971b2594286709b2e0281487269eee  -? 
+
+Message Length is: 402 
+
+Send Message : No, not yet. How about you? 
+
+Message Length is: 351 
+
+Send Message : No, I need to lose some weight before I put on a bathing suit. But you have a great figure. 
+
+Message Length is: 415 
+
+Send Message : Uh, thanks. Well, I better go and 0d3409660212df6dd348cba17a6f58c3  -K. There are a few people I haven't said hello to yet. 
+
+Message Length is: 446 
+
+Send Message : Wait! Did you hear that the b6e693b66d2003e1d08cb4d0a4fedda0  -K is coming to town? 
