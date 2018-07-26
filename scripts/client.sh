@@ -73,8 +73,8 @@ do
 		# send SIP messages conversation J with conversation_parameters[I]; 
 		while IFS='' read -r line || [[ -n "$line" ]]; do
 			cp message.txt temp.txt;
-			sed -i s/FROM_IP/$ip/g temp.txt;
-			sed -i s/TO_IP/$2/g temp.txt;
+			sed -i 's/FROM_IP/$ip/g' temp.txt;
+			sed -i 's/TO_IP/$2/g' temp.txt;
 			
 			messsg=${line//RANDOM_VERB/${randoms[random_verb$i]}};
 			messsg=${messsg//RANDOM_THING/${randoms[random_thing$i]}};
@@ -93,15 +93,16 @@ do
 			messsg=${messsg//RANDOM_LOCATION/${randoms[random_location$i]}};
 			printf "\nSend Message : $messsg \n";
 			
-			sed -i s/MESSAGE_HERE/$messsg/g temp.txt;
-			
 			cunt=$(echo -n $messsg | wc -m);
 			count=$((324+$cunt))
 			
 			printf "\nMessage Length is: $count \n";
-			sed -i s/LENGTH_M/$count/g temp.txt;
+			
+			sed -i 's/LENGTH_M/$count/g' temp.txt;
+			sed -i 's/MESSAGE_HERE/$messsg/g' temp.txt;
 			
 			python siprig.py -f temp.txt -d $2 -p 5060 -P 55220 -v;
+			
 		done < "conv$j.txt"
 		
 		
