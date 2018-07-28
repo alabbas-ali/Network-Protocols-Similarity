@@ -56,7 +56,7 @@ do
 	do
 		# Start capture of ethernet_port 
 		printf "\nStart experiment $j captures traffic $i. \n";
-		tshark -i $1 -w $j/traffic$i.pcap -a duration:22 & 
+		tshark -i $1 -w $j/traffic$i.pcap -a duration:12 & 
 		
 		sleep 2;
 		
@@ -105,10 +105,7 @@ do
 			
 			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp;
 			
-			sleep 10
-			
 		done < "conv$j.txt"
-		
 		
 		#echo ${randoms[random_verb$j]};
 		#echo ${randoms[random_thing$j]};
