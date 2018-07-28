@@ -103,7 +103,7 @@ do
 			sed -i s/LENGTH_M/$count/g temp.txt;
 			sed -i "s/MESSAGE_HERE/$messsg/g" temp.txt;
 			
-			python siprig.py -f temp.txt -d $2 -p 5060 -P 55220 -v;
+			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp;
 			
 			sleep 10
 			
