@@ -1,2 +1,2 @@
 #!/bin/bash
-python server.py
+python /home/weeam/similartymetrics/scripts/server.py &
