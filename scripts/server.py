@@ -9,7 +9,7 @@ def main():
 
 
 def start_server():
-    host = " "
+    host = socket.gethostname()
     port = 12397         # arbitrary non-privileged port
 
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
