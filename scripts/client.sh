@@ -24,21 +24,21 @@ declare -A randoms
 # random_init() the strings for SIP conversation
 for i in {1..50}
 do
-	randoms[random_verb$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_thing$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_name$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_study$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_weekday$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_action$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_verbk$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_namek$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_weekdayk$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_religion$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_thingk$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_daytime$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_weekdays$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_time$i]=$(shuf -i 0-1000 -n 1 | md5sum)
-	randoms[random_location$i]=$(shuf -i 0-1000 -n 1 | md5sum)
+	randoms[random_verb$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_thing$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_name$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_study$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_weekday$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_action$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_verbk$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_namek$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_weekdayk$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_religion$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_thingk$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_daytime$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_weekdays$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_time$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
+	randoms[random_location$i]=$(shuf -i 0-1000 -n 1 | md5sum | cut -d ' ' -f 1)
 done
 
 ip=$(ifconfig | grep -A 1 $1 | tail -1 | cut -d ' ' -f 10);
@@ -101,7 +101,7 @@ do
 			printf "\nMessage Length is: $count \n";
 			
 			sed -i s/LENGTH_M/$count/g temp.txt;
-			sed -i s/MESSAGE_HERE/$messsg/g temp.txt;
+			sed -i "s/MESSAGE_HERE/$messsg/g" temp.txt;
 			
 			sleep 50;
 			
