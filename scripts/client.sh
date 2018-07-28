@@ -56,7 +56,7 @@ do
 	do
 		# Start capture of ethernet_port 
 		printf "\nStart experiment $j captures traffic $i. \n";
-		tshark -i $1 -w $j/traffic$i.pcap -a duration:62 & 
+		tshark -i $1 -w $j/traffic$i.pcap -a duration:22 & 
 		
 		sleep 2;
 		
@@ -103,10 +103,9 @@ do
 			sed -i s/LENGTH_M/$count/g temp.txt;
 			sed -i "s/MESSAGE_HERE/$messsg/g" temp.txt;
 			
-			sleep 50;
-			
 			python siprig.py -f temp.txt -d $2 -p 5060 -P 55220 -v;
 			
+			sleep 10
 			
 		done < "conv$j.txt"
 		
