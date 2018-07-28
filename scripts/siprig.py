@@ -176,6 +176,7 @@ def main():
 
         # Configure a socket and send the request.
         s = get_socket(args.src_ip, args.src_port, args.timeout, protocol)
+	print("connrcting with : " + protocol + " to server : " + args.src_ip + " and port : " + args.src_port)
         s.connect((args.dest_addr, args.dest_port))
         s.send(request.bytes)
 
