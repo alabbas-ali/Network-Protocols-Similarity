@@ -64,7 +64,7 @@ do
 		printf "\ncurl to http://$2/webpage$j?id=$i \n";
 		curl -i -H "Accept: application/html" \
 				-H "Content-Type: application/html" \
-				-X GET http://$2/webpage$j?id=$i >> http_output.txt
+				-X GET http://$2/website$j/?id=$i >> http_output.txt
 		rm -rf http_output.txt;
 		# do FTP request to folderJ file I; 
 		mkdir ftptmp;
