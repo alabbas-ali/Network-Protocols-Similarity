@@ -105,6 +105,7 @@ do
 			
 			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp;
 			
+			rm temp.txt;
 		done < "conv$j.txt"
 		
 		#echo ${randoms[random_verb$j]};
