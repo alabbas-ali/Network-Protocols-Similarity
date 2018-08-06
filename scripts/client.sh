@@ -61,16 +61,16 @@ do
 		sleep 2;
 		
 		# do HTTP curl request to web page J with parameter I;
-		printf "\ncurl to http://$2/webpage$j?id=$i \n";
+		printf "\ncurl to http://$2/website$j/?id=$i \n";
 		curl -i -H "Accept: application/html" \
 				-H "Content-Type: application/html" \
 				-X GET http://$2/website$j/?id=$i >> http_output.txt
 		rm -rf http_output.txt;
 		# do FTP request to folderJ file I; 
-		mkdir ftptmp;
-		wget -c ftp://$3:$4@$2/folder$j/file$i.docx \
-				-p /ftptmp/
-		rm -rf ftptmp;
+		mkdir FTPtmp;
+		wget -c ftp://$3:$4@$2/Temp/Folder$j/File$i.docx \
+				-p /FTPtmp/
+		rm -rf FTPtmp;
 		
 		# send SIP messages conversation J with conversation_parameters[I]; 
 		while IFS='' read -r line || [[ -n "$line" ]]; do
