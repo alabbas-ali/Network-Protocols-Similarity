@@ -106,9 +106,8 @@ do
 			rm temp.txt;
 		done < "conv$j.txt"
 		
-		#echo ${randoms[random_verb$j]};
-		#echo ${randoms[random_thing$j]};
-		
+		printf "\nRound: $j of $i \n";
+		printf "\nRound Finished \n";
 		sleep 10;
 	done
 done
