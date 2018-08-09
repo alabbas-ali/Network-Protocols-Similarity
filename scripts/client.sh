@@ -67,10 +67,8 @@ do
 				-X GET http://$2/website$j/?id=$i >> http_output.txt
 		rm -rf http_output.txt;
 		# do FTP request to folderJ file I; 
-		mkdir FTPtmp;
-		wget -c ftp://$3:$4@$2/Temp/Folder$j/File$i.docx \
-				-p /FTPtmp/
-		rm -rf FTPtmp;
+		wget -c ftp://$3:$4@$2/Temp/Folder$j/File$i.docx -p;
+		rm -r $2/;
 		
 		# send SIP messages conversation J with conversation_parameters[I]; 
 		while IFS='' read -r line || [[ -n "$line" ]]; do
