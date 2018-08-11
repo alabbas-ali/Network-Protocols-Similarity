@@ -56,7 +56,7 @@ do
 	do
 		# Start capture of ethernet_port 
 		printf "\nStart experiment $j captures traffic $i. \n";
-		tshark -i $1 -w $j/traffic$i.pcap -a duration:12 & 
+		tshark -i $1 -w $j/traffic$i.pcap -F pcap -a duration:12 & 
 		
 		sleep 2;
 		
