@@ -56,7 +56,7 @@ do
 	do
 		# Start capture of ethernet_port 
 		printf "\nStart experiment $j captures traffic $i. \n";
-		tshark -i $1 -w $j/traffic$i.pcap -F pcap -a duration:12 & 
+		tshark -i $1 -w $j/traffic$i.pcap -F pcap -a duration:50 & 
 		
 		sleep 2;
 		
@@ -64,10 +64,13 @@ do
 		printf "\ncurl to http://$2/website$j/?id=$i \n";
 		curl -i -H "Accept: application/html" \
 				-H "Content-Type: application/html" \
-				-X GET http://$2/website$j/?id=$i >> http_output.txt
+				-X GET http://$2/website$j/?id=$i >> http_output.txt & 
+		sleep 5;
 		rm -rf http_output.txt;
+		
 		# do FTP request to folderJ file I; 
-		wget -c ftp://$3:$4@$2/Temp/Folder$j/File$i.docx -p;
+		wget -c ftp://$3:$4@$2/Temp/Folder$j/File$i.docx -p & 
+		sleep 5;
 		rm -r $2/;
 		
 		# send SIP messages conversation J with conversation_parameters[I]; 
@@ -94,21 +97,21 @@ do
 			printf "\nSend Message : $messsg \n";
 			
 			cunt=$(echo -n $messsg | wc -m);
-			count=$((324+$cunt))
+			count=$((324 + $cunt))
 			
 			printf "\nMessage Length is: $count \n";
 			
 			sed -i s/LENGTH_M/$count/g temp.txt;
 			sed -i "s/MESSAGE_HERE/$messsg/g" temp.txt;
 			
-			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp;
-			
+			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp &;
+			sleep 2;
 			rm temp.txt;
 		done < "conv$j.txt"
 		
 		printf "\nRound: $j of $i \n";
 		printf "\nRound Finished \n";
-		sleep 10;
+		sleep 5;
 	done
 done
 
