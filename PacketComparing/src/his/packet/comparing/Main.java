@@ -22,11 +22,10 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		String[] files = new String[1];
-//		for (int i = 0; i < 50 ; i++) {
-//			files[i] = "traffic" + (i + 1) + ".pcap";
-//		}
-		files[0] = "traffic66.pcap";
+		String[] files = new String[50];
+		for (int i = 0; i <51 ; i++) {
+			files[i] = "traffic" + (i + 1) + ".pcap";
+		}
 		CapReader reader = new CapReader();
 		reader.readFiles("resources/1/", files);
 		
