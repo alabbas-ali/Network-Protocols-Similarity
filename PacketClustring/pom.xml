@@ -20,6 +20,12 @@
 			<artifactId>Similarity-Metrics</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>PacketComparing</groupId>
+			<artifactId>his.packet.comparing</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

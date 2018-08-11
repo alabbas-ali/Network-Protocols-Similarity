@@ -15,10 +15,4 @@ public class CapReader {
 		}
 	}
 	
-	public static void main(String[] args) throws IOException {
-		String[] files = {"trafic1.pcap", "trafic2.pcap", "trafic3.pcap"};
-		CapReader reader = new CapReader();
-		reader.readFiles("resources/comparing/", files);
-	}
-	
 }

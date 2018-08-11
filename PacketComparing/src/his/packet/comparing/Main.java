@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import his.packet.stream.SerialStreamReader;
+import his.pcap.reader.CapReader;
 import his.similarity.metrics.Similarities;
 import his.similarity.metrics.Similarity;
 
@@ -20,6 +21,14 @@ public class Main {
 	public static Similarity smith = Similarity.getInstance(Similarities.SMITHWATERMAN, 2);
 
 	public static void main(String[] args) throws IOException {
+		
+		String[] files = new String[1];
+//		for (int i = 0; i < 50 ; i++) {
+//			files[i] = "traffic" + (i + 1) + ".pcap";
+//		}
+		files[0] = "traffic66.pcap";
+		CapReader reader = new CapReader();
+		reader.readFiles("resources/1/", files);
 		
 		String[] stream1_folder = { "resources/comparing/trafic1_paylod" };
 		String[] stream2_folder = { "resources/comparing/trafic2_paylod" };
