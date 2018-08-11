@@ -5,7 +5,8 @@ if [[ ( -z "$1" ) || ( -z "$2" ) || ( -z "$3" ) || ( -z "$4" ) ]]
 then
     printf "No argument supplied \n";
 	printf "Please Use the script like :\n";
-	printf " scipt.sh ethernet_port server_IP ftp_user ftp_password \n";
+	printf " client.sh ethernet_port server_IP ftp_user ftp_password \n";
+	# ./client.sh enp0s3 192.168.0.10 weeam weeam
 	exit 0;
 fi
 
@@ -104,8 +105,10 @@ do
 			sed -i s/LENGTH_M/$count/g temp.txt;
 			sed -i "s/MESSAGE_HERE/$messsg/g" temp.txt;
 			
-			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp &;
+			python3 siprig.py -f temp.txt -d $2 -p 12397 -S $ip -P 55220 -v --tcp &
+			
 			sleep 2;
+			
 			rm temp.txt;
 		done < "conv$j.txt"
 		
