@@ -6,15 +6,14 @@ import java.io.FileReader;
 
 public abstract class MyStreamReader {
 
-	protected final String[] files = { "/rtp.txt", "/sip.txt", "/rtcp.txt", "/sdp.txt", "/http.txt" };
-	protected final int hight = 5;
-
+	protected int hight;
 	protected int width;
 	protected BufferedReader[][] readers;
 	protected boolean[][] streamsEnd;
 
-	public MyStreamReader(String[] folers) throws FileNotFoundException {
+	public MyStreamReader(String[] folers, String[] files) throws FileNotFoundException {
 		width = folers.length;
+		hight = files.length;
 		readers = new BufferedReader[width][hight];
 		streamsEnd = new boolean[width][hight];
 

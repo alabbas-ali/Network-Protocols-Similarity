@@ -8,8 +8,8 @@ public class RandomStreamReader extends MyStreamReader implements IRandomStreamR
 
 	private Random randomNum = new Random();
 
-	public RandomStreamReader(String[] folers) throws FileNotFoundException {
-		super(folers);
+	public RandomStreamReader(String[] folers, String[] files) throws FileNotFoundException {
+		super(folers, files);
 	}
 
 	public String hasNext() throws IOException {

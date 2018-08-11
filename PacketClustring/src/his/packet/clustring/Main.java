@@ -12,13 +12,6 @@ import io.pkts.framer.FramingException;
 
 public class Main {
 
-	public static String[] streams = { 
-			"resources/clustring/trafic1_paylod", 
-			"resources/clustring/trafic2_paylod", 
-			"resources/clustring/trafic3_paylod", 
-			"resources/clustring/trafic4_paylod",
-			"resources/clustring/trafic5_paylod" 
-	};
 
 	public static void main(String[] args) throws IOException, FramingException {
 		
@@ -27,11 +20,17 @@ public class Main {
 		String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap", "trafic4.pcap", "trafic5.pcap" };
 		reader.readFiles("resources/clustring/", files);
 		
+		String[] streamFoldes = { 
+				"resources/clustring/trafic1_paylod", "resources/clustring/trafic2_paylod", "resources/clustring/trafic3_paylod", 
+				"resources/clustring/trafic4_paylod","resources/clustring/trafic5_paylod" 
+		};
+		String[] streamFiles = { "/rtp.txt", "/sip.txt", "/rtcp.txt", "/sdp.txt", "/http.txt" };
+		
 		System.out.println("::: Initilize Claster Cintromes, Learning from Stream proparty :::");
-		List<Category> categories = getCategories(3);
+		List<Category> categories = getCategories(3, streamFoldes, streamFiles);
 		
 		System.out.println("::: Read Random Steram and Try to classify them using similarities :::");
-		RandomStreamReader randomStreams = new RandomStreamReader(streams);
+		RandomStreamReader randomStreams = new RandomStreamReader(streamFoldes, streamFiles);
 		
 		Categorizer f = new Categorizer(Similarities.COSINE ,categories, 3);
 		String randombacket;
@@ -57,11 +56,11 @@ public class Main {
 		}
 	}
 
-	public static List<Category> getCategories(int k) {
+	public static List<Category> getCategories(int k, String[] streamFoldes, String[] streamFiles) {
 		List<Category> categories = new ArrayList<Category>();
 		
 		try {
-			SerialStreamReader serialStreams = new SerialStreamReader(streams);
+			SerialStreamReader serialStreams = new SerialStreamReader(streamFoldes, streamFiles);
 
 			Category rtpCat = new Category("rtp");
 			String rtpbacket = "";

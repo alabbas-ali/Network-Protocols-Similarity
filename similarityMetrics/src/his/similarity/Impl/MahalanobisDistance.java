@@ -44,7 +44,7 @@ public class MahalanobisDistance extends KShingling{
         //invcov = new LUDecomposition(temp).getSolver().getInverse();
         
         // Create a new array with the difference between the two arrays
-        double [] diff = new double[length];
+        //double [] diff = new double[length];
         
        // for (int i = 0; i < length; i++) {
        //     diff[i] = profile1.get(key) - profile2.get(key);

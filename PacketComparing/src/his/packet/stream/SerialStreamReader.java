@@ -10,9 +10,10 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 	private int currentSipFolder = 0;
 	private int currentRtcpFolder = 0;
 	private int currentSdpFolder = 0;
-
-	public SerialStreamReader(String[] folers) throws FileNotFoundException {
-		super(folers);
+	private int currentFTPFolder = 0;
+	
+	public SerialStreamReader(String[] folers, String[] files) throws FileNotFoundException {
+		super(folers, files);
 	}
 	
 	public String hasNextRtp() throws IOException {
@@ -73,6 +74,19 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 			return null;
 		}
 		return hasNextHttp();
+	}
+	
+	
+	public String hasNextFtp() throws IOException {
+		String line = "";
+		if ((line = readers[currentFTPFolder][4].readLine()) != null) {
+			return line;
+		}
+		currentFTPFolder ++;
+		if(currentFTPFolder == width) {
+			return null;
+		}
+		return hasNextFtp();
 	}
 	
 }
