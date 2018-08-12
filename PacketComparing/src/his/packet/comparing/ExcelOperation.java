@@ -19,8 +19,14 @@ public class ExcelOperation {
 
 	public ExcelOperation(String outputfile) throws IOException {
 		file = new File(outputfile);
-		myInput = new FileInputStream(file);
-		myWorkBook = new XSSFWorkbook(myInput);
+		if( file.exists() ) {
+			myInput = new FileInputStream(file);
+			myWorkBook = new XSSFWorkbook(myInput);
+		} else {
+			System.out.println("The xlsx output file dosen't exests");
+			throw new IOException();
+		}
+		
 	}
 
 	public void createSheet(int i) {

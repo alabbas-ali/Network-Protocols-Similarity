@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import his.pcap.reader.http.HttpPacket;
+import his.pcap.reader.sip.SIPPacket;
 import his.pcap.readerframer.HttpFramer;
+import his.pcap.readerframer.SipFramer;
 import io.pkts.PacketHandler;
 import io.pkts.packet.Packet;
 import io.pkts.packet.TCPPacket;
@@ -23,10 +25,12 @@ public class MyPacketHandler implements PacketHandler {
 	private BufferedWriter sdpWriter;
 	private BufferedWriter httpWriter;
 	private HttpFramer httpFramer;
+	private SipFramer sipFramer;
 
 	public MyPacketHandler(String folder, String prefix) throws IOException {
 		this.dirName = folder + prefix + "_paylod/";
 		httpFramer = new HttpFramer();
+		sipFramer = new SipFramer();
 		this.init();
 	}
 
@@ -69,9 +73,20 @@ public class MyPacketHandler implements PacketHandler {
 
 		if (packet.hasProtocol(Protocol.TCP)) {
 			TCPPacket tcp = (TCPPacket) packet.getPacket(Protocol.TCP);
-			if (tcp.getPayload() != null && httpFramer.accept(tcp.getPayload())) {
+			if (
+				tcp.getPayload() != null && 
+				httpFramer.accept(tcp.getPayload())
+			) {
 				// System.out.println("this is HTTP packet");
 				this.save(httpFramer.frame(tcp, tcp.getPayload()), httpWriter, "http");
+			}
+			
+			if (
+				tcp.getPayload() != null &&
+				sipFramer.accept(tcp.getPayload())
+			) {
+				SIPPacket s = sipFramer.frame(tcp, tcp.getPayload());
+				this.save(s, sipWriter, "mysip");
 			}
 		}
 
@@ -80,8 +95,11 @@ public class MyPacketHandler implements PacketHandler {
 			this.save(packet.getPacket(Protocol.RTP), rtpWriter, "rtp");
 		}
 
-		if (packet.hasProtocol(Protocol.SIP)) {
-			// System.out.println("Save SIP Payload");
+		if (
+			packet.hasProtocol(Protocol.SIP)
+			&& !packet.getPacket(Protocol.SIP).getPayload().isEmpty()
+		) {
+			System.out.println("Save SIP Payload : " +  packet.getPacket(Protocol.SIP).getPayload());
 			this.save(packet.getPacket(Protocol.SIP), sipWriter, "sip");
 		}
 
@@ -91,7 +109,8 @@ public class MyPacketHandler implements PacketHandler {
 		}
 
 		if (packet.hasProtocol(Protocol.SDP)) {
-			// System.out.println("Save SDP Payload");
+			System.out.print("Save SDP Payload : ");
+			//System.out.println(new String(packet.getPacket(Protocol.SDP).getPayload().getArray()));
 			this.save(packet.getPacket(Protocol.SDP), sdpWriter, "sdp");
 		}
 
@@ -105,28 +124,36 @@ public class MyPacketHandler implements PacketHandler {
 				HttpPacket http = (HttpPacket) packet;
 				if (http.getHttpPayload() != null) {
 					if (http.isCompressed()) {
-						try {
-							//System.out.println(bytesToHex(http.getHttpPayload()));
-							//System.out.println(new String(http.getHttpPayload(), "UTF-8"));
-							//System.out.println( "decoding" );
-							//System.out.println(" is : " + bytesToHex(http.contentdecoding()));
-							writer.write(bytesToHex(http.contentdecoding()));
+						try {		
+							System.out.println("Decoding ...." );
+							System.out.println(new String(http.getHttpPayload(), "UTF-8"));
+							System.out.println("Decoding output is : \n " + new String(http.contentdecoding()));
+							writer.write(this.bytesToHex(http.contentdecoding()));
 							writer.write("\n");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}else {
-						writer.write(bytesToHex(http.getHttpPayload()));
+						//System.out.println("Save HTML content like is : \n " + new String(http.getHttpPayload()));
+						writer.write(this.bytesToHex(http.getHttpPayload()));
 						writer.write("\n");
 						writer.flush();
 					}
 				}
 				break;
-
+			case "mysip":
+				SIPPacket sip = (SIPPacket) packet;
+				if (sip.getSipPayload() != null) {
+					//System.out.println("Save SIP content like is : \n " + new String(sip.getSipPayload()));
+					writer.write(this.bytesToHex(sip.getSipPayload()));
+					writer.write("\n");
+					writer.flush();
+				}
+				break;
 			default:
 				//if(protocal == "rtp")
 				//	System.out.println(this.bytesToHex(packet.getPayload().getArray()));
-				writer.write(this.bytesToHex(packet.getPayload().getArray()));
+				writer.write(packet.getPayload().dumpAsHex());
 				writer.write("\n");
 				writer.flush();
 				break;

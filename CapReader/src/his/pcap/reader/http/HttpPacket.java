@@ -6,7 +6,7 @@ import io.pkts.packet.impl.ApplicationPacket;
 
 public interface HttpPacket extends ApplicationPacket {
 
-	public Headers getHeaders();
+	public HttpHeaders getHeaders();
 
 	public byte[] getHttpPayload();
 

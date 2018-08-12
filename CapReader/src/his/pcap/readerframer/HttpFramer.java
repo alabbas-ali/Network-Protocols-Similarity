@@ -2,7 +2,7 @@ package his.pcap.readerframer;
 
 import java.io.IOException;
 
-import his.pcap.reader.http.Headers;
+import his.pcap.reader.http.HttpHeaders;
 import his.pcap.reader.http.HttpPacket;
 import his.pcap.reader.http.HttpPacketImpl;
 import io.pkts.buffer.Buffer;
@@ -32,7 +32,7 @@ public final class HttpFramer {
 		}
 		
 		String packetAsString = buffer.toString();
-		Headers headers = new Headers();
+		HttpHeaders headers = new HttpHeaders();
 		byte[] payload = null;
 		String[] tokens = packetAsString.split("\r\n");
 

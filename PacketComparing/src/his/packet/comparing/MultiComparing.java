@@ -33,13 +33,15 @@ public class MultiComparing {
 			for (int i = 0; i < 50 ; i++) {
 				files[i] = "traffic" + (i + 1) + ".pcap";
 			}
+			
 			CapReader reader = new CapReader();
 			reader.readFiles("resources/" + j + "/", files);
+			reader.readFtp("resources/" + j + "/", files);
 		}
 		
 		String[] files = { "/sip.txt", "/http.txt", "/ftp.txt" };
 		
-		for (int i = 0; i < 50 ; i++) {
+		for (int i = 1; i < 51 ; i++) {
 			
 			String[] stream1_folder = { "resources/1/trafic" + i + "_paylod" };
 			String[] stream2_folder = { "resources/2/trafic" + i + "_paylod" };

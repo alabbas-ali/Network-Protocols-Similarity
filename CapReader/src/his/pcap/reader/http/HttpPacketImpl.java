@@ -15,45 +15,21 @@ import io.pkts.protocol.Protocol;
 
 public class HttpPacketImpl extends AbstractPacket implements HttpPacket {
 
-	private Headers headers;
-	private byte[] httpPayload;
+	private HttpHeaders headers;
+	private byte[] payload;
 
-	public HttpPacketImpl(final TransportPacket parent, final Headers headers, final byte[] payload) {
+	public HttpPacketImpl(final TransportPacket parent, final HttpHeaders headers, final byte[] payload) {
 		super(Protocol.TCP, parent, null);
 		this.headers = headers;
-		this.httpPayload = payload;
+		this.payload = payload;
 	}
 
-	@Override
-	public long getArrivalTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void write(OutputStream out, Buffer payload) throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Packet getNextPacket() throws IOException, PacketParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Packet clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Headers getHeaders() {
+	public HttpHeaders getHeaders() {
 		return headers;
 	}
 
 	public byte[] getHttpPayload() {
-		return httpPayload;
+		return payload;
 	}
 
 	public boolean isCompressed() {
@@ -98,10 +74,9 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket {
 	}
 
 	public int getPayloadLength() {
-		return httpPayload.length;
+		return payload.length;
 	}
 
-	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		if (headers != null) {
@@ -110,7 +85,26 @@ public class HttpPacketImpl extends AbstractPacket implements HttpPacket {
 				builder.append(String.format("%s: %s\n", name, headers.getValue(name)));
 			}
 		}
-		builder.append(String.format("Encoded string: %s\n", httpPayload.toString()));
+		builder.append(String.format("Encoded string: %s\n", payload.toString()));
 		return builder.toString();
+	}
+	
+	public long getArrivalTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void write(OutputStream out, Buffer payload) throws IOException {
+		// TODO Auto-generated method stub
+	}
+
+	public Packet getNextPacket() throws IOException, PacketParseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Packet clone() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
