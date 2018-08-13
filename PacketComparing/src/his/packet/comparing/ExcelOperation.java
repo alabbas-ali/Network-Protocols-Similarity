@@ -36,7 +36,7 @@ public class ExcelOperation {
 	public void createHeadLine(int rownum) {
 		XSSFRow row1 = mySheet.createRow(rownum);
 		XSSFCell r1c1 = row1.createCell(0);
-		r1c1.setCellValue("Protocole1");
+		r1c1.setCellValue("Protocol");
 		XSSFCell r1cm = row1.createCell(1);
 		r1cm.setCellValue("String's length");
 		XSSFCell r1c2 = row1.createCell(2);
