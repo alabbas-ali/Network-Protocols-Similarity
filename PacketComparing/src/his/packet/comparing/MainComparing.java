@@ -25,9 +25,17 @@ public class MainComparing {
 		String[] stream2_folder = { "resources/comparing/trafic2_paylod" };
 		String[] stream3_folder = { "resources/comparing/trafic3_paylod" };
 		String[] files = { "/rtp.txt", "/sip.txt", "/rtcp.txt", "/sdp.txt", "/http.txt" };
-		Map<String, String> stream1 = readStream(stream1_folder, files);
-		Map<String, String> stream2 = readStream(stream2_folder, files);
-		Map<String, String> stream3 = readStream(stream3_folder, files);
+		
+		Map<String, Integer>  order = new HashMap<String, Integer>();
+		order.put("rtp", 0);
+		order.put("sip", 1);
+		order.put("rtcp", 2);
+		order.put("sdp", 3);
+		order.put("http", 4);
+		
+		Map<String, String> stream1 = readStream(stream1_folder, files, order);
+		Map<String, String> stream2 = readStream(stream2_folder, files, order);
+		Map<String, String> stream3 = readStream(stream3_folder, files, order);
 		
 		System.out.println("::: Comparing the same stream :::");
 		printTable(stream1, stream1);
@@ -77,13 +85,13 @@ public class MainComparing {
 		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 	
-	public static Map<String, String> readStream(String[] folders, String[] files) {
+	public static Map<String, String> readStream(String[] folders, String[] files, Map<String, Integer>  order) {
 		
 		Map<String, String> stream = new HashMap<String, String>();
 		
 		try {
 			
-			SerialStreamReader serialStreams = new SerialStreamReader(folders, files);
+			SerialStreamReader serialStreams = new SerialStreamReader(folders, files, order);
 			
 			String rtpbacket = "";
 			while ((rtpbacket = serialStreams.hasNextRtp()) != null) {

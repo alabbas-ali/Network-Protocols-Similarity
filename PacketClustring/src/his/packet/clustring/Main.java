@@ -2,7 +2,9 @@ package his.packet.clustring;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import his.packet.stream.RandomStreamReader;
 import his.packet.stream.SerialStreamReader;
@@ -26,8 +28,15 @@ public class Main {
 		};
 		String[] streamFiles = { "/rtp.txt", "/sip.txt", "/rtcp.txt", "/sdp.txt", "/http.txt" };
 		
+		Map<String, Integer>  order = new HashMap<String, Integer>();
+		order.put("rtp", 0);
+		order.put("sip", 1);
+		order.put("rtcp", 2);
+		order.put("sdp", 3);
+		order.put("http", 4);
+		
 		System.out.println("::: Initilize Claster Cintromes, Learning from Stream proparty :::");
-		List<Category> categories = getCategories(3, streamFoldes, streamFiles);
+		List<Category> categories = getCategories(3, streamFoldes, streamFiles, order);
 		
 		System.out.println("::: Read Random Steram and Try to classify them using similarities :::");
 		RandomStreamReader randomStreams = new RandomStreamReader(streamFoldes, streamFiles);
@@ -56,11 +65,11 @@ public class Main {
 		}
 	}
 
-	public static List<Category> getCategories(int k, String[] streamFoldes, String[] streamFiles) {
+	public static List<Category> getCategories(int k, String[] streamFoldes, String[] streamFiles, Map<String, Integer>  order) {
 		List<Category> categories = new ArrayList<Category>();
 		
 		try {
-			SerialStreamReader serialStreams = new SerialStreamReader(streamFoldes, streamFiles);
+			SerialStreamReader serialStreams = new SerialStreamReader(streamFoldes, streamFiles, order);
 
 			Category rtpCat = new Category("rtp");
 			String rtpbacket = "";

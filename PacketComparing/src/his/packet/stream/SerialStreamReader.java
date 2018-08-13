@@ -2,6 +2,7 @@ package his.packet.stream;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 public class SerialStreamReader extends MyStreamReader implements ISerialStreamReader{
 
@@ -12,13 +13,16 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 	private int currentSdpFolder = 0;
 	private int currentFTPFolder = 0;
 	
-	public SerialStreamReader(String[] folers, String[] files) throws FileNotFoundException {
+	private Map<String, Integer>  order;
+	
+	public SerialStreamReader(String[] folers, String[] files, Map<String, Integer>  order) throws FileNotFoundException {
 		super(folers, files);
+		this.order = order;
 	}
 	
 	public String hasNextRtp() throws IOException {
 		String line = "";
-		if ((line = readers[currentRtpFolder][0].readLine()) != null) {
+		if ((line = readers[currentRtpFolder][order.get("rtp")].readLine()) != null) {
 			return line;
 		}
 		currentRtpFolder ++;
@@ -30,7 +34,7 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 
 	public String hasNextSip() throws IOException {
 		String line = "";
-		if ((line = readers[currentSipFolder][1].readLine()) != null) {
+		if ((line = readers[currentSipFolder][order.get("sip")].readLine()) != null) {
 			return line;
 		}
 		currentSipFolder ++;
@@ -42,7 +46,7 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 
 	public String hasNextRtcp() throws IOException {
 		String line = "";
-		if ((line = readers[currentRtcpFolder][2].readLine()) != null) {
+		if ((line = readers[currentRtcpFolder][order.get("rtcp")].readLine()) != null) {
 			return line;
 		}
 		currentRtcpFolder ++;
@@ -54,7 +58,7 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 	
 	public String hasNextSdp() throws IOException {
 		String line = "";
-		if ((line = readers[currentSdpFolder][3].readLine()) != null) {
+		if ((line = readers[currentSdpFolder][order.get("sdp")].readLine()) != null) {
 			return line;
 		}
 		currentSdpFolder ++;
@@ -66,7 +70,7 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 	
 	public String hasNextHttp() throws IOException {
 		String line = "";
-		if ((line = readers[currentHttpFolder][4].readLine()) != null) {
+		if ((line = readers[currentHttpFolder][order.get("http")].readLine()) != null) {
 			return line;
 		}
 		currentHttpFolder ++;
@@ -76,10 +80,9 @@ public class SerialStreamReader extends MyStreamReader implements ISerialStreamR
 		return hasNextHttp();
 	}
 	
-	
 	public String hasNextFtp() throws IOException {
 		String line = "";
-		if ((line = readers[currentFTPFolder][4].readLine()) != null) {
+		if ((line = readers[currentFTPFolder][order.get("ftp")].readLine()) != null) {
 			return line;
 		}
 		currentFTPFolder ++;

@@ -10,6 +10,9 @@ public abstract class MyStreamReader {
 	protected int width;
 	protected BufferedReader[][] readers;
 	protected boolean[][] streamsEnd;
+	
+	//  String[] files =  {"/rtp.txt", "/sip.txt", "/rtcp.txt", "/sdp.txt", "/http.txt", "/ftp.txt"}
+	//  Please keep this order , you can remove one or moor but you have to keep the order 
 
 	public MyStreamReader(String[] folers, String[] files) throws FileNotFoundException {
 		width = folers.length;
