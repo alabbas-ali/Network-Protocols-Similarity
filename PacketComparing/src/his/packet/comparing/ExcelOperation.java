@@ -36,18 +36,20 @@ public class ExcelOperation {
 	public void createHeadLine(int rownum) {
 		XSSFRow row1 = mySheet.createRow(rownum);
 		XSSFCell r1c1 = row1.createCell(0);
-		r1c1.setCellValue("Protocoles");
-		XSSFCell r1c2 = row1.createCell(1);
+		r1c1.setCellValue("Protocole1");
+		XSSFCell r1cm = row1.createCell(1);
+		r1cm.setCellValue("String's length");
+		XSSFCell r1c2 = row1.createCell(2);
 		r1c2.setCellValue("Cosine");
-		XSSFCell r1c3 = row1.createCell(2);
+		XSSFCell r1c3 = row1.createCell(3);
 		r1c3.setCellValue("Jaccard");
-		XSSFCell r1c4 = row1.createCell(3);
+		XSSFCell r1c4 = row1.createCell(4);
 		r1c4.setCellValue("RBF");
-		XSSFCell r1c5 = row1.createCell(4);
+		XSSFCell r1c5 = row1.createCell(5);
 		r1c5.setCellValue("NGram");
-		XSSFCell r1c6 = row1.createCell(5);
+		XSSFCell r1c6 = row1.createCell(6);
 		r1c6.setCellValue("Needleman_Wunch");
-		XSSFCell r1c7 = row1.createCell(6);
+		XSSFCell r1c7 = row1.createCell(7);
 		r1c7.setCellValue("Smith_Waterman");
 	}
 

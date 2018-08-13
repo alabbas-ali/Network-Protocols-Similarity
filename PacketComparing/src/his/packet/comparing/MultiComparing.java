@@ -95,21 +95,28 @@ public class MultiComparing {
 	) {
 		NumberFormat formatter = new DecimalFormat("#0.0000");
 		rownum ++;
-		String[] out = new String[6];
-		out[0] = protocol1 + "/" + protocol2;
-		System.out.print(" Compare number :" + experment + ", protocol " + protocol1 + " with " + protocol2 + " ");
-		out[1] = formatter.format(cosine.similarity(stream1.get(protocol1), stream2.get(protocol2)));
+		String[] out = new String[7];
+		out[0] = protocol1 + " / " + protocol2;
+		System.out.print(" Compare number :" + experment + ", protocol " + protocol1 + " with " + protocol2 + " with string lenght of (");
+		System.out.print(stream1.get(protocol1).length() +  ") and (" + stream2.get(protocol2).length() + ") ");
+		out[1] = stream1.get(protocol1).length() + " / " + stream2.get(protocol2).length();
+		out[2] = formatter.format(cosine.similarity(stream1.get(protocol1), stream2.get(protocol2)));
 		System.out.print(".");
-		out[2] = formatter.format(jaccard.similarity(stream1.get(protocol1), stream2.get(protocol2)));
+		out[3] = formatter.format(jaccard.similarity(stream1.get(protocol1), stream2.get(protocol2)));
 		System.out.print(".");
-		out[3] = formatter.format(rbf.similarity(stream1.get(protocol1), stream2.get(protocol2)));
+		out[4] = formatter.format(rbf.similarity(stream1.get(protocol1), stream2.get(protocol2)));
 		System.out.print(".");
-		out[4] = formatter.format(ngram.similarity(stream1.get(protocol1), stream2.get(protocol2)));
-		System.out.print(".");
-		out[5] = formatter.format(need.similarity(stream1.get(protocol1), stream2.get(protocol2)));
-		System.out.print(".");
-		//out[6] = formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2)));
-		System.out.print(".");
+		if(
+			stream1.get(protocol1).length() < 250000 && 
+			stream2.get(protocol2).length()< 250000
+		) {
+			out[5] = formatter.format(ngram.similarity(stream1.get(protocol1), stream2.get(protocol2)));
+			System.out.print(".");
+			out[6] = formatter.format(need.similarity(stream1.get(protocol1), stream2.get(protocol2)));
+			System.out.print(".");
+		}
+		//out[7] = formatter.format(smith.similarity(stream1.get(protocol1), stream1.get(protocol2)));
+		//System.out.print(".");
 		System.out.println();
 		eOperation.addRowInfo( out , rownum);
 	}
