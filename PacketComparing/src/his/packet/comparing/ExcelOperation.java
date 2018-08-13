@@ -30,7 +30,7 @@ public class ExcelOperation {
 	}
 
 	public void createSheet(int i) {
-		mySheet = myWorkBook.createSheet("outputShhet " + i);
+		mySheet = myWorkBook.createSheet("outputSheet " + i);
 	}
 
 	public void createHeadLine(int rownum) {
