@@ -1,0 +1,5 @@
+
+tshark -r traffic2.pcap -Y ftp-data -T fields -e tcp.stream
+tshark -nr traffic2.pcap -q -z follow,tcp,raw,2
+
+

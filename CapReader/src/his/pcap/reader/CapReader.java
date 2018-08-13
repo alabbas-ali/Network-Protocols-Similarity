@@ -48,7 +48,7 @@ public class CapReader {
 
 				if (flowNumber != null) {
 					
-					p = Runtime.getRuntime().exec("C:/Program Files/Wireshark/tshark.exe -r " + folder + files[i] + " -q -z follow,tcp,raw," + flowNumber);
+					p = Runtime.getRuntime().exec("C:/Program Files/Wireshark/tshark.exe -nr " + folder + files[i] + " -q -z follow,tcp,raw," + flowNumber);
 					p.waitFor();
 					System.out.println("finish");
 					reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
