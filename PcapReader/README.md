@@ -26,11 +26,15 @@ the out put will be a lest of text files containing the HEX representation of th
 this files will be saved in folders coresponding to files count like
 
 folder/trafic1_paylod/
+
 folder/trafic2_paylod/
+
 folder/trafic3_paylod/
 
 for the example apave it will be :
 
 resources/comparing/trafic1_paylod/
+
 resources/comparing/trafic2_paylod/
+
 resources/comparing/trafic3_paylod/
