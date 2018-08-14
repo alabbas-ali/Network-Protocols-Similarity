@@ -2,6 +2,8 @@
 
 this is a project to read the pcap files captured throw Wirechark or tshark and extrack the payload of RTP, RTCP, SDP, HTTP and SIP protocols
 
+this project depend on io.pkts https://github.com/aboutsip/pkts
+
 ## Usage
 
 PcapReader reader = new PcapReader();
