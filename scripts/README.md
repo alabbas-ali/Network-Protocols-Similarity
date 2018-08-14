@@ -23,7 +23,7 @@ This project is an attempt to automate a 50 network experiment or running differ
 
 ⋅⋅⋅⋅ 3. ftp://user:password@MachineIP/Temp/Folder3/File[1..50].docx
 
-⋅⋅ * Deploy and run server.py on it ( Used to simulate SIP server).
+3. Deploy and run server.py on it ( Used to simulate SIP server).
 
 ## Run The Experment
 
