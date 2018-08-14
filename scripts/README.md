@@ -6,15 +6,15 @@ This project is an attempt to automate a 50 network experiment or running differ
 
 1. Two Machines with linux OS
 2. One Machine is considered as Server with:
-⋅⋅* Apache having 3 webside runing on the urls like:
-⋅⋅⋅⋅1. MachineIP/website1/?id= [1..50]
-⋅⋅⋅⋅2. MachineIP/website2/?id= [1..50]
-⋅⋅⋅⋅3. MachineIP/website3/?id= [1..50]
-⋅⋅* FTP server with 3 shared Folders like:
-⋅⋅⋅⋅1. ftp://user:password@MachineIP/Temp/Folder1/File[1..50].docx
-⋅⋅⋅⋅2. ftp://user:password@MachineIP/Temp/Folder2/File[1..50].docx
-⋅⋅⋅⋅3. ftp://user:password@MachineIP/Temp/Folder3/File[1..50].docx
-⋅⋅* Deploy and run server.py on it ( Used to simulate SIP server).
+⋅⋅ * Apache having 3 webside runing on the urls like:
+⋅⋅⋅⋅ 1. MachineIP/website1/?id= [1..50]
+⋅⋅⋅⋅ 2. MachineIP/website2/?id= [1..50]
+⋅⋅⋅⋅ 3. MachineIP/website3/?id= [1..50]
+⋅⋅ * FTP server with 3 shared Folders like:
+⋅⋅⋅⋅ 1. ftp://user:password@MachineIP/Temp/Folder1/File[1..50].docx
+⋅⋅⋅⋅ 2. ftp://user:password@MachineIP/Temp/Folder2/File[1..50].docx
+⋅⋅⋅⋅ 3. ftp://user:password@MachineIP/Temp/Folder3/File[1..50].docx
+⋅⋅ * Deploy and run server.py on it ( Used to simulate SIP server).
 
 ## Run The Experment
 
