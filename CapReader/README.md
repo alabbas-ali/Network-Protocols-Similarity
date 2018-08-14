@@ -2,7 +2,7 @@
 
 this is a project to read the pcap files captured throw Wirechark or tshark and extrack the payload of RTP, RTCP, SDP, HTTP and SIP protocols
 
-## Usage :
+## Usage
 
 CapReader reader = new CapReader();
 reader.readFiles(String foldes, String[] files);
@@ -27,6 +27,6 @@ folder/trafic3_paylod/
 
 for the example apave it will be :
 
-resources/comparing//trafic1_paylod/
-resources/comparing//trafic2_paylod/
-resources/comparing//trafic3_paylod/
+resources/comparing/trafic1_paylod/
+resources/comparing/trafic2_paylod/
+resources/comparing/trafic3_paylod/
