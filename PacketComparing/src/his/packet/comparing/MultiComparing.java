@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import his.packet.stream.SerialStreamReader;
-import his.pcap.reader.CapReader;
+import his.pcap.reader.PcapReader;
 import his.similarity.metrics.Similarities;
 import his.similarity.metrics.Similarity;
 
@@ -35,7 +35,7 @@ public class MultiComparing {
 				files[i] = "traffic" + (i + 1) + ".pcap";
 			}
 			
-			CapReader reader = new CapReader();
+			PcapReader reader = new PcapReader();
 			reader.readFiles("../scripts/" + j + "/", files);
 		}
 		

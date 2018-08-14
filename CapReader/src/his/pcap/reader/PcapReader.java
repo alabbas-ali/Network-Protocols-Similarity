@@ -3,7 +3,7 @@ package his.pcap.reader;
 import java.io.IOException;
 import io.pkts.Pcap;
 
-public class CapReader {
+public class PcapReader {
 
 	public void readFiles(String folder, String[] files) throws IOException {
 

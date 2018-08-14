@@ -8,7 +8,7 @@ import java.util.Map;
 
 import his.packet.stream.RandomStreamReader;
 import his.packet.stream.SerialStreamReader;
-import his.pcap.reader.CapReader;
+import his.pcap.reader.PcapReader;
 import his.similarity.metrics.Similarities;
 import io.pkts.framer.FramingException;
 
@@ -18,7 +18,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, FramingException {
 		
 		System.out.println("::: Read pcap files and extract protocol packets :::");
-		CapReader reader = new CapReader();
+		PcapReader reader = new PcapReader();
 		String[] files = { "trafic1.pcap", "trafic2.pcap", "trafic3.pcap", "trafic4.pcap", "trafic5.pcap" };
 		reader.readFiles("resources/clustring/", files);
 		
