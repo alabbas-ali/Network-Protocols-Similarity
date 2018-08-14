@@ -5,6 +5,7 @@ this is a project to read the pcap files captured throw Wirechark or tshark and 
 ## Usage
 
 CapReader reader = new CapReader();
+
 reader.readFiles(String foldes, String[] files);
 
 example:
