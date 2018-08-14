@@ -18,6 +18,7 @@ String foldes = "resources/comparing/";
 String[] files = {"trafic1.pcap", "trafic2.pcap", "trafic3.pcap"};
 
 PcapReader reader = new PcapReader();
+
 reader.readFiles(String[] foldes, String[] files);
 
 ## Output
