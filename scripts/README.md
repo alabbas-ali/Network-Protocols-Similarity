@@ -7,7 +7,7 @@ This project is an attempt to automate a 50 network experiment or running differ
 1. Two Machines with linux OS
 2. One Machine is considered as Server with:
 
-⋅⋅ * Apache having 3 webside runing on the urls like:
+⋅⋅ - Apache having 3 webside runing on the urls like:
 
 ⋅⋅⋅⋅ 1. MachineIP/website1/?id= [1..50]
 
@@ -15,7 +15,7 @@ This project is an attempt to automate a 50 network experiment or running differ
 
 ⋅⋅⋅⋅ 3. MachineIP/website3/?id= [1..50]
 
-⋅⋅ * FTP server with 3 shared Folders like:
+⋅⋅ - FTP server with 3 shared Folders like:
 
 ⋅⋅⋅⋅ 1. ftp://user:password@MachineIP/Temp/Folder1/File[1..50].docx
 
