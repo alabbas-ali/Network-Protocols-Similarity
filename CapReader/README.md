@@ -11,6 +11,7 @@ example:
 
 
 String foldes = "resources/comparing/";
+
 String[] files = {"trafic1.pcap", "trafic2.pcap", "trafic3.pcap"};
 
 CapReader reader = new CapReader();
