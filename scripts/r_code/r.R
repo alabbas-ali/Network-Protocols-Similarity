@@ -8,6 +8,7 @@ MyData <- MyData[2:101,][3:47]
 
 lables <- c("Cosine", "Jaccard", "RBF", "Ngram", "Needleman_wunch")
 
+
 for (i in 1:5){
   http_sip <- as.double(MyData[,i])
   http_ftp <- as.double(MyData[,(5+i)])
@@ -30,3 +31,4 @@ for (i in 1:5){
   plot(ftp_ftp_1, main=paste(lables[i], "FTP/FTP (100% DIF)", sep=" "), sub=paste("η =", mean(ftp_ftp_1), ", σ =",sd(ftp_ftp_1), sep=" "))
   plot(sip_sip_1, main=paste(lables[i], "SIP/SIP (100% DIF)", sep=" "), sub=paste("η =", mean(sip_sip_1), ", σ =",sd(sip_sip_1), sep=" "))
 }
+
