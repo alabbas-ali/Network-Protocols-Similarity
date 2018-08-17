@@ -22,4 +22,8 @@ This research project contains the following folders :
 - PcapReader: Java Project to extract different protocols payload content and save them in sperate files
 - PacketComparing: Java project to extract the similarity metrics result of different protocols comparison and save results in excel file 
 - PacketClustring: Java Project (still not fully implemented), aims to do classification based on protocol payload similarity and feature selection
- 
+
+
+## Note
+
+Please refer to each folder to find more explanation about each project
