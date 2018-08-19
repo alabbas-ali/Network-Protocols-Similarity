@@ -1,0 +1,19 @@
+
+conversation_parameters = [];
+
+For I = 1 to 50:
+	conversation_parameters[i] = random_init()
+For;
+
+For J = 1 to 3:
+    IF (folderJ exist) remove FolderI;
+		- Create FolderJ;
+    For I = 1 to 50:
+		- fileI;	
+		- Start capture of Ethernet;
+		- do HTTP request to web page J with parameter I;
+		- do FTP request to folderJ file I;
+		- do conversation J with conversation_parameters[I];
+		- Save Traffic[fileI] in folderJ ;
+    For;
+For;
