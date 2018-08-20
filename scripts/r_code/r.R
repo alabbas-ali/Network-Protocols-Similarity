@@ -1,7 +1,5 @@
 
 # set the working directory to be the same as file path
-require(ggplot2)
-
 dir <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(dir)
 
@@ -29,7 +27,7 @@ for (i in 1:5) {
     main=paste(lables[i], "HTTP/SIP", sep=" "), 
     sub=paste("µ =", mean(http_sip), ", σ =",sd(http_sip), sep=" "), 
     ylim = c(0, 1), 
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   plot(
@@ -37,7 +35,7 @@ for (i in 1:5) {
     main=paste(lables[i], "HTTP/FTP", sep=" "), 
     sub=paste("µ =", mean(http_ftp), ", σ =",sd(http_ftp), sep=" "), 
     ylim = c(0, 1),
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   plot(
@@ -45,7 +43,7 @@ for (i in 1:5) {
     main=paste(lables[i], "SIP/FTP", sep=" "), 
     sub=paste("µ =", mean(sip_ftp), ", σ =",sd(sip_ftp), sep=" "), 
     ylim = c(0, 1),
-    xlab = "Similarity Value %", 
+    xlab = "Similarity Value", 
     ylab = "Sample Number"
   )
   plot(
@@ -53,7 +51,7 @@ for (i in 1:5) {
     main=paste(lables[i], "HTTP/HTTP (50% DIF)", sep=" "), 
     sub=paste("µ =", mean(http_http_5), ", σ =",sd(http_http_5), sep=" "), 
     ylim = c(0, 1),
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   plot(
@@ -61,7 +59,7 @@ for (i in 1:5) {
     main=paste(lables[i], "FTP/FTP (50% DIF)", sep=" "), 
     sub=paste("µ =", mean(ftp_ftp_5), ", σ =",sd(ftp_ftp_5), sep=" "), 
     ylim = c(0, 1),
-    xlab = "Similarity Value %", 
+    xlab = "Similarity Value", 
     ylab = "Sample Number"
   )
   plot(
@@ -69,7 +67,7 @@ for (i in 1:5) {
     main=paste(lables[i], "SIP/SIP (50% DIF)", sep=" "), 
     sub=paste("µ =", mean(sip_sip_5), ", σ =",sd(sip_sip_5), sep=" "), 
     ylim = c(0, 1),
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   plot(
@@ -77,7 +75,7 @@ for (i in 1:5) {
     main=paste(lables[i], "HTTP/HTTP (100% DIF)", sep=" "), 
     sub=paste("µ =", mean(http_http_1), ", σ =",sd(http_http_1), sep=" "), 
     ylim = c(0, 1),
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   plot(
@@ -85,7 +83,7 @@ for (i in 1:5) {
     main=paste(lables[i], "FTP/FTP (100% DIF)", sep=" "), 
     sub=paste("µ =", mean(ftp_ftp_1), ", σ =",sd(ftp_ftp_1), sep=" "), 
     ylim = c(0, 1),
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   plot(
@@ -93,20 +91,32 @@ for (i in 1:5) {
     main= paste(lables[i], "SIP/SIP (100% DIF)", sep=" "), 
     sub=paste("µ =", mean(sip_sip_1), ", σ =",sd(sip_sip_1), sep=" "), 
     ylim = c(0, 1),
-    ylab = "Similarity Value %", 
+    ylab = "Similarity Value", 
     xlab = "Sample Number"
   )
   
   tt <- data.frame(
-    http_sip, 
-    http_ftp, 
-    sip_ftp, 
-    http_http_5, 
-    ftp_ftp_5, 
-    sip_sip_5, 
-    http_http_1, 
-    ftp_ftp_1, 
-    sip_sip_1
+    replace(http_sip,  http_sip < 0 ,0),
+    replace(http_ftp, http_ftp < 0 ,0), 
+    replace(sip_ftp, sip_ftp < 0 ,0), 
+    replace(http_http_5, http_http_5 < 0 ,0), 
+    replace(ftp_ftp_5, ftp_ftp_5 < 0 ,0), 
+    replace(sip_sip_5, sip_sip_5 < 0 ,0), 
+    replace(http_http_1, http_http_1 < 0 ,0), 
+    replace(ftp_ftp_1, ftp_ftp_1 < 0 ,0), 
+    replace(sip_sip_1, sip_sip_1 < 0 ,0)
+  )
+  
+  colnames(tt) <-  c(
+    "HTTP/SIP",
+    "HTTP/FTP",
+    "SIP/FTP",
+    "HTTP/HTTP 50%",
+    "FTP/FTP 50%",
+    "SIP/SIP 50%",
+    "HTTP/HTTP 100%",
+    "FTP/FTP 100%",
+    "SIP/SIP 100%"
   )
   
   par(mfrow = c(1,1))
